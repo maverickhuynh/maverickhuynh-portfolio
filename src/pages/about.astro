@@ -1,1 +1,297 @@
+---
+// About page
+---
 
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About - Maverick Huynh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="about-page">
+      <!-- Navigation -->
+      <nav class="nav initial-hidden">
+        <span class="nav-text">
+          Freshman at USC based in Los Angeles / <a href="/" class="home-link">home</a> / <a href="#" class="about-link">about</a>
+        </span>
+        <div class="menu-icon">☰</div>
+      </nav>
+
+      <!-- Content will go here -->
+      <div class="image-container initial-hidden">
+        <img src="/images/094178B4-86BD-46A0-947B-6013A783A267 (2).jpg" alt="About image" class="full-width-image" />
+      </div>
+      <h2 class="background-title initial-hidden">background</h2>
+      <p class="background-subtitle initial-hidden">
+        <span class="highlight-text highlight-first">Just a kid from Salem, Oregon who learned early that challenges are really just</span>
+        <span class="highlight-text highlight-second"> opportunities waiting to be built on.</span>
+      </p>
+      <div class="background-content initial-hidden">
+        <div class="content-left">
+          <p>Growing up, I eventually realized that having tiger Asian parents was a blessing. At the time, being pushed into piano, guitar, saxophone, basketball, and lacrosse just felt like doing what was expected. Looking back, those experiences taught me to stay open-minded and curious, especially when something felt unfamiliar or uncomfortable at first.</p>
+          <p>Looking back, that structure shaped how I approach everything now: learning by repetition, pushing through discomfort, and improving through iteration. I'm currently a freshman at USC based in Los Angeles, exploring engineering, design, and real-world impact.</p>
+        </div>
+        <div class="content-right">
+          <h3 class="fun-facts-title">Fun facts about me:</h3>
+          <ul class="fun-facts-list">
+            <li><span class="fun-fact-icon">🎸</span><span class="fun-fact-text">I played electric guitar in a band when I was in 5th grade and performed weekly at a restaurant called Shotski's</span></li>
+            <li><span class="fun-fact-icon">🏀</span><span class="fun-fact-text">I sat behind Kim Kardashian at the 2011 NBA All-Star game</span></li>
+            <li><span class="fun-fact-icon">👟</span><span class="fun-fact-text">I painted a custom Air Force 1 for someone on the San Diego Padres</span></li>
+            <li><span class="fun-fact-icon">🏊</span><span class="fun-fact-text">I swam with Steve Nash at the Honolulu Sheraton</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const aboutPage = document.querySelector('.about-page');
+        
+        // Add loaded class after a brief delay for smooth transition
+        setTimeout(() => {
+          aboutPage.classList.add('loaded');
+          
+          // Stagger animations for different sections
+          const elements = aboutPage.querySelectorAll('.initial-hidden');
+          elements.forEach((el, index) => {
+            setTimeout(() => {
+              el.style.transitionDelay = `${index * 0.1}s`;
+            }, 50);
+          });
+        }, 100);
+
+        // Reload page when clicking on "about" link
+        const aboutLink = document.querySelector('.about-link');
+        if (aboutLink) {
+          aboutLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.location.reload();
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    color: white;
+    background: linear-gradient(180deg, #000000 0%, #1a1a1a 50%, #2d2d2d 100%);
+    background-attachment: fixed;
+  }
+
+  .about-page {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #000000 0%, #1a1a1a 50%, #2d2d2d 100%);
+    background-attachment: fixed;
+    padding-bottom: 2rem; /* Add padding at bottom */
+  }
+
+  /* Page load animation */
+  .initial-hidden {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+
+  .about-page.loaded .initial-hidden {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Navigation */
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 1.75rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    z-index: 100;
+  }
+
+  .nav-text {
+    font-size: 0.9rem;
+    color: white;
+    letter-spacing: 0.1em;
+    line-height: 1.2;
+  }
+
+  .home-link {
+    color: white;
+    text-decoration: none;
+    transition: text-decoration 0.2s, opacity 0.2s;
+  }
+
+  .home-link:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+  }
+
+  .about-link {
+    color: white;
+    text-decoration: none;
+    transition: text-decoration 0.2s, opacity 0.2s;
+    cursor: pointer;
+  }
+
+  .about-link:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+  }
+
+  .menu-icon {
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  .image-container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    padding-top: 5.5rem; /* Space below navigation (1.75rem padding + nav content) */
+    overflow: hidden;
+  }
+
+  .full-width-image {
+    width: 100%;
+    height: 400px; /* Fixed height to crop the image */
+    display: block;
+    object-fit: cover;
+    object-position: center 70%; /* Shift to show more of bottom */
+    border-radius: 0;
+  }
+
+  .background-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: white;
+    margin: 2rem 0 1rem 2rem;
+    text-transform: lowercase;
+  }
+
+  .background-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 300;
+    color: white;
+    margin: 1rem 2rem 2rem 2rem; /* Added top margin to lower it */
+    max-width: 800px;
+    line-height: 1.6;
+    opacity: 0.9;
+    position: relative;
+    display: inline-block;
+  }
+
+  .highlight-text {
+    position: relative;
+    padding: 0.2em 0;
+    display: inline-block;
+  }
+
+  .highlight-text::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    background-color: rgba(255, 255, 0, 0.4); /* Semi-transparent yellow */
+    z-index: -1;
+    animation: highlight 1.5s ease-in-out forwards;
+  }
+
+  .highlight-second::after {
+    animation-delay: 1.8s; /* Start after first highlight finishes */
+  }
+
+  @keyframes highlight {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+
+  .background-content {
+    font-family: 'Inter', sans-serif;
+    color: white;
+    margin: 0 2rem 2rem 2rem;
+    max-width: 1400px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    line-height: 1.8;
+  }
+
+  .content-left {
+    max-width: 800px;
+  }
+
+  .content-right {
+    max-width: 350px; /* Reduced from 500px for more compression */
+    align-self: flex-start; /* Align to top to match content-left */
+    margin-left: 10rem; /* Push it further to the right */
+  }
+
+  .background-content p {
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+  }
+
+  .fun-facts-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem; /* Reduced from 1.25rem */
+    font-weight: 400; /* Increased from 300 for slightly bolder text */
+    color: rgba(255, 255, 255, 0.85); /* Less white - slightly transparent */
+    margin-bottom: 0.5rem;
+    margin-top: 0; /* Ensure it starts at the top */
+    margin-left: calc(1em + 0.5rem); /* Align with text (icon width + gap) */
+    text-transform: lowercase;
+  }
+
+  .fun-facts-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .fun-facts-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    margin-top: -0.5rem; /* Negative top margin to extend hover area upward */
+    padding-top: 0.5rem; /* Padding to fill the gap */
+    padding-bottom: 0.5rem; /* Padding to fill the gap */
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.85); /* Less white - slightly transparent */
+    transition: background-color 0.4s ease; /* Longer transition */
+  }
+
+  .fun-facts-list li:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Grey transparent highlight */
+  }
+
+  .fun-fact-icon {
+    flex-shrink: 0;
+  }
+
+  .fun-fact-text {
+    flex: 1;
+  }
+</style>
