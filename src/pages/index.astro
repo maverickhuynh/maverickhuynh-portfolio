@@ -129,6 +129,15 @@ import Scene from '../components/Scene.svelte';
         </div>
       </div>
 
+      <!-- Photo Gallery Section -->
+      <section class="photo-gallery">
+        <div class="gallery-container">
+          <img src="/images/890599CB-6805-4E59-A990-7AA2EECA99A3.JPG" alt="Portrait" class="gallery-photo photo-1" />
+          <img src="/images/407A1662.JPG" alt="Portrait on stool" class="gallery-photo photo-2" />
+          <img src="/images/BRAND CAMP 2024-96 (2).jpg" alt="Playing guitar" class="gallery-photo photo-3" />
+        </div>
+      </section>
+
       <!-- Content Section -->
       <section class="content-section">
         <div class="content-container">
@@ -602,6 +611,51 @@ import Scene from '../components/Scene.svelte';
     100% {
       transform: translateX(-33.333%);
     }
+  }
+
+  /* Photo Gallery Section */
+  .photo-gallery {
+    position: relative;
+    width: 100%;
+    padding: 4rem 2rem;
+    z-index: 10;
+  }
+
+  .gallery-container {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: -2rem; /* Negative gap for overlap */
+    max-width: 600px;
+    margin-left: 2rem;
+  }
+
+  .gallery-photo {
+    width: 250px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .photo-1 {
+    position: relative;
+    z-index: 1; /* Behind middle photo */
+    transform: translateY(-20px);
+  }
+
+  .photo-2 {
+    position: relative;
+    z-index: 3; /* In front - highest z-index */
+    margin-left: -3rem; /* Overlap */
+    transform: translateY(10px);
+  }
+
+  .photo-3 {
+    position: relative;
+    z-index: 2; /* Behind middle photo but in front of first */
+    margin-left: -3rem; /* Overlap */
+    transform: translateY(-10px);
   }
 
   /* Content Section */
