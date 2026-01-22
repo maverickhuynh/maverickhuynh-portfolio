@@ -1,0 +1,359 @@
+---
+// Work page
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Work - Maverick Huynh</title>
+  </head>
+  <body>
+    <div class="work-page">
+      <!-- Navigation -->
+      <nav class="nav initial-hidden">
+        <span class="nav-text">
+          Freshman at USC based in Los Angeles / <a href="/" class="home-link">home</a> / <a href="/work" class="work-link">my work</a>
+        </span>
+        <div class="menu-icon">☰</div>
+      </nav>
+
+      <!-- Sidebar Toggle Button -->
+      <button class="sidebar-toggle" aria-label="Toggle sidebar">
+        <span class="toggle-icon">←</span>
+      </button>
+
+      <!-- Sidebar -->
+      <aside class="projects-sidebar initial-hidden">
+        <h2 class="sidebar-title">Projects</h2>
+        <ul class="projects-list">
+          <li class="project-item active" data-project="project-1">
+            <span class="project-name">Project 1</span>
+          </li>
+          <li class="project-item" data-project="project-2">
+            <span class="project-name">Project 2</span>
+          </li>
+          <li class="project-item" data-project="project-3">
+            <span class="project-name">Project 3</span>
+          </li>
+        </ul>
+      </aside>
+
+      <!-- Content will go here -->
+      <div class="work-content">
+        <div class="project-content" id="project-1">
+          <h1 class="work-title">Project 1</h1>
+          <p class="work-subtitle">Project 1 content goes here...</p>
+        </div>
+        <div class="project-content" id="project-2" style="display: none;">
+          <h1 class="work-title">Project 2</h1>
+          <p class="work-subtitle">Project 2 content goes here...</p>
+        </div>
+        <div class="project-content" id="project-3" style="display: none;">
+          <h1 class="work-title">Project 3</h1>
+          <p class="work-subtitle">Project 3 content goes here...</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const workPage = document.querySelector('.work-page');
+        
+        // Add loaded class after a brief delay for smooth transition
+        setTimeout(() => {
+          workPage.classList.add('loaded');
+          
+          // Stagger animations for different sections
+          const elements = workPage.querySelectorAll('.initial-hidden');
+          elements.forEach((el, index) => {
+            setTimeout(() => {
+              el.style.transitionDelay = `${index * 0.1}s`;
+            }, 50);
+          });
+        }, 100);
+
+        // Reload page when clicking on "my work" link
+        const workLink = document.querySelector('.work-link');
+        if (workLink) {
+          workLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.location.reload();
+          });
+        }
+
+        // Project navigation
+        const projectItems = document.querySelectorAll('.project-item');
+        const projectContents = document.querySelectorAll('.project-content');
+
+        projectItems.forEach(item => {
+          item.addEventListener('click', () => {
+            const projectId = item.getAttribute('data-project');
+
+            // Remove active class from all items
+            projectItems.forEach(i => i.classList.remove('active'));
+            // Add active class to clicked item
+            item.classList.add('active');
+
+            // Hide all project contents
+            projectContents.forEach(content => {
+              content.style.display = 'none';
+            });
+
+            // Show selected project content
+            const selectedContent = document.getElementById(projectId);
+            if (selectedContent) {
+              selectedContent.style.display = 'block';
+            }
+          });
+        });
+
+        // Set initial project based on hash or default to first
+        const hash = window.location.hash.slice(1);
+        if (hash) {
+          const projectItem = document.querySelector(`[data-project="${hash}"]`);
+          if (projectItem) {
+            projectItem.click();
+          }
+        }
+
+        // Sidebar toggle functionality
+        const sidebar = document.querySelector('.projects-sidebar');
+        const sidebarToggle = document.querySelector('.sidebar-toggle');
+        const workContent = document.querySelector('.work-content');
+
+        if (sidebarToggle && sidebar && workContent && workPage) {
+          sidebarToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            sidebar.classList.toggle('collapsed');
+            workContent.classList.toggle('sidebar-collapsed');
+            workPage.classList.toggle('sidebar-collapsed');
+          });
+        } else {
+          console.log('Missing elements:', { sidebarToggle, sidebar, workContent, workPage });
+        }
+      });
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    color: white;
+    background: linear-gradient(180deg, #000000 0%, #1a1a1a 50%, #2d2d2d 100%);
+    background-attachment: fixed;
+  }
+
+  .work-page {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #000000 0%, #1a1a1a 50%, #2d2d2d 100%);
+    background-attachment: fixed;
+    padding-bottom: 2rem;
+    display: flex;
+  }
+
+  /* Page load animation */
+  .initial-hidden {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+
+  .work-page.loaded .initial-hidden {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Navigation */
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 1.75rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    z-index: 100;
+  }
+
+  .nav-text {
+    font-size: 0.9rem;
+    color: white;
+    letter-spacing: 0.1em;
+    line-height: 1.2;
+  }
+
+  .home-link {
+    color: white;
+    text-decoration: none;
+    transition: text-decoration 0.2s, opacity 0.2s;
+  }
+
+  .home-link:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+  }
+
+  .work-link {
+    color: white;
+    text-decoration: none;
+    transition: text-decoration 0.2s, opacity 0.2s;
+    cursor: pointer;
+  }
+
+  .work-link:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+  }
+
+  .menu-icon {
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  /* Sidebar */
+  .projects-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 180px;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.3);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 6rem 0 2rem 1.5rem;
+    z-index: 50;
+    overflow-y: auto;
+    transition: transform 0.3s ease, width 0.3s ease;
+  }
+
+  .projects-sidebar.collapsed {
+    transform: translateX(-100%);
+  }
+
+  /* Sidebar Toggle Button */
+  .sidebar-toggle {
+    position: fixed;
+    top: 1.75rem;
+    left: 180px; /* Always at the right edge of the sidebar */
+    width: 30px;
+    height: 30px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: none;
+    border-radius: 0 4px 4px 0;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 51;
+  }
+
+  .sidebar-toggle:hover {
+    background: rgba(0, 0, 0, 0.7);
+  }
+
+  /* Rotate icon when sidebar is collapsed */
+  .work-page.sidebar-collapsed .sidebar-toggle .toggle-icon {
+    transform: rotate(180deg);
+  }
+
+  .toggle-icon {
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+  }
+
+  .sidebar-title {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin: 0 0 2rem 0;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .projects-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .project-item {
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .project-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .project-item.active {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+  }
+
+  .project-name {
+    font-size: 0.95rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+  }
+
+  .work-content {
+    flex: 1;
+    margin-left: 180px; /* Space for sidebar - updated width */
+    padding-top: 8rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    transition: margin-left 0.3s ease;
+  }
+
+  .work-content.sidebar-collapsed {
+    margin-left: 0;
+  }
+
+  .project-content {
+    animation: fadeIn 0.3s ease-in;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .work-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 1rem 0;
+    text-transform: lowercase;
+  }
+
+  .work-subtitle {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+  }
+</style>
+

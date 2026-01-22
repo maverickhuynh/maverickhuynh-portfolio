@@ -132,16 +132,24 @@ import Scene from '../components/Scene.svelte';
       <!-- Photo Gallery Section -->
       <section class="photo-gallery">
         <div class="gallery-container">
-          <img src="/images/890599CB-6805-4E59-A990-7AA2EECA99A3.JPG" alt="Portrait" class="gallery-photo photo-1" />
-          <img src="/images/407A1662.JPG" alt="Portrait on stool" class="gallery-photo photo-2" />
-          <img src="/images/BRAND CAMP 2024-96 (2).jpg" alt="Playing guitar" class="gallery-photo photo-3" />
+          <div class="gallery-left">
+            <div class="gallery-photos">
+              <img src="/images/890599CB-6805-4E59-A990-7AA2EECA99A3.JPG" alt="Portrait" class="gallery-photo photo-1" />
+              <img src="/images/407A1662.JPG" alt="Portrait on stool" class="gallery-photo photo-2" />
+              <img src="/images/BRAND CAMP 2024-96 (2).jpg" alt="Playing guitar" class="gallery-photo photo-3" />
+            </div>
+            <div class="button-container">
+              <a href="/about" class="about-me-button">about me</a>
+              <a href="/work" class="my-work-button">my work</a>
+            </div>
+          </div>
+          <p class="gallery-text"></p>
         </div>
       </section>
 
       <!-- Content Section -->
       <section class="content-section">
         <div class="content-container">
-          <a href="/about" class="about-me-button">about me</a>
         </div>
       </section>
 
@@ -344,6 +352,64 @@ import Scene from '../components/Scene.svelte';
             }
           });
         });
+
+        // Photo gallery fade-in on scroll
+        const photoGallery = document.querySelector('.photo-gallery');
+        const photos = document.querySelectorAll('.gallery-photo');
+        const galleryText = document.querySelector('.gallery-text');
+        
+        if (photoGallery && photos.length > 0) {
+          // Split text into words and letters, wrap words in spans
+          if (galleryText) {
+            const text = 'Born in Oregon, raised in New Jersey — currently studying ISE and learning how to challenge my own limits.';
+            const words = text.split(' ');
+            galleryText.innerHTML = words.map((word, wordIndex) => {
+              const letters = word.split('');
+              const letterSpans = letters.map((char, index) => {
+                return `<span class="letter" data-index="${wordIndex}-${index}">${char}</span>`;
+              }).join('');
+              const wordSpan = `<span class="word">${letterSpans}</span>`;
+              // Add space after each word except the last one
+              return wordIndex < words.length - 1 ? wordSpan + '<span class="letter space"> </span>' : wordSpan;
+            }).join('');
+          }
+          
+          const observerOptions = {
+            root: null,
+            rootMargin: '-100px', // Wait until gallery is 100px into viewport
+            threshold: 0.5 // Trigger when 50% of the gallery is visible
+          };
+          
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                // Fade in photos one by one with delays
+                photos.forEach((photo, index) => {
+                  setTimeout(() => {
+                    photo.classList.add('fade-in');
+                  }, index * 400); // 400ms delay between each photo
+                });
+                
+                // Fade in text letters one by one after the last photo
+                if (galleryText) {
+                  const letters = galleryText.querySelectorAll('.letter');
+                  const startDelay = photos.length * 400;
+                  
+                  letters.forEach((letter, index) => {
+                    setTimeout(() => {
+                      letter.classList.add('fade-in');
+                    }, startDelay + (index * 30)); // 30ms delay between each letter
+                  });
+                }
+                
+                // Unobserve after animation starts to prevent re-triggering
+                observer.unobserve(entry.target);
+              }
+            });
+          }, observerOptions);
+          
+          observer.observe(photoGallery);
+        }
       });
     </script>
   </body>
@@ -625,9 +691,57 @@ import Scene from '../components/Scene.svelte';
     position: relative;
     display: flex;
     align-items: flex-start;
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .gallery-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .gallery-photos {
+    display: flex;
+    align-items: flex-start;
     gap: -2rem; /* Negative gap for overlap */
-    max-width: 600px;
-    margin-left: 2rem;
+    margin-left: -6rem; /* Move photos further left */
+  }
+
+  .gallery-text {
+    font-size: 2.5rem;
+    font-weight: 300;
+    line-height: 1.4;
+    color: white;
+    margin: 0;
+    margin-left: 4rem; /* Move text further to the right */
+    margin-top: 2rem; /* Position the text */
+    flex: 1;
+    max-width: 500px;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    white-space: normal;
+  }
+
+  .gallery-text .word {
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  .gallery-text .letter {
+    display: inline;
+    opacity: 0;
+    transition: opacity 0.6s ease-out;
+  }
+
+  .gallery-text .letter.fade-in {
+    opacity: 1;
+  }
+
+  .gallery-text .letter.space {
+    width: 0.25em;
   }
 
   .gallery-photo {
@@ -636,11 +750,22 @@ import Scene from '../components/Scene.svelte';
     object-fit: cover;
     border-radius: 4px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: translateY(-30px);
+    transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+  }
+
+  .gallery-photo.fade-in {
+    opacity: 1;
   }
 
   .photo-1 {
     position: relative;
     z-index: 1; /* Behind middle photo */
+    transform: translateY(-50px);
+  }
+
+  .photo-1.fade-in {
     transform: translateY(-20px);
   }
 
@@ -648,6 +773,10 @@ import Scene from '../components/Scene.svelte';
     position: relative;
     z-index: 3; /* In front - highest z-index */
     margin-left: -3rem; /* Overlap */
+    transform: translateY(-20px);
+  }
+
+  .photo-2.fade-in {
     transform: translateY(10px);
   }
 
@@ -655,6 +784,10 @@ import Scene from '../components/Scene.svelte';
     position: relative;
     z-index: 2; /* Behind middle photo but in front of first */
     margin-left: -3rem; /* Overlap */
+    transform: translateY(-40px);
+  }
+
+  .photo-3.fade-in {
     transform: translateY(-10px);
   }
 
@@ -674,7 +807,15 @@ import Scene from '../components/Scene.svelte';
     padding: 4rem 2rem;
   }
 
-  .about-me-button {
+  .button-container {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    margin-left: -6rem; /* Align with photos */
+  }
+
+  .about-me-button,
+  .my-work-button {
     display: inline-block;
     padding: 1rem 2.5rem;
     font-size: 1.2rem;
@@ -683,12 +824,14 @@ import Scene from '../components/Scene.svelte';
     text-decoration: none;
     text-transform: lowercase;
     letter-spacing: 0.1em;
-    border: 2px solid white;
+    border: 2px solid transparent; /* Transparent border to maintain spacing */
     transition: all 0.3s ease;
     background: transparent;
   }
 
-  .about-me-button:hover {
+  .about-me-button:hover,
+  .my-work-button:hover {
+    border: 2px solid white; /* Show border on hover */
     background: white;
     color: #1a1f3a;
     transform: translateY(-2px);
