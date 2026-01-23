@@ -33,9 +33,9 @@
           <!-- Work Item 1 -->
           <div class="work-item initial-hidden">
             <div class="work-item-image">
-              <img src="/images/IMG_2935 (1).jpg" alt="Work item 1" class="work-image" />
+              <img src="/images/Screenshot 2026-01-23 150322.png" alt="Work item 1" class="work-image" />
               <div class="center-image-overlay">
-                <img src="/images/IMG_2930 (1).jpg" alt="Work item 1 center" class="center-image" />
+                <img src="/images/IMG_2935 (1).jpg" alt="Work item 1 center" class="center-image" />
               </div>
               <div class="image-overlay">
                 <div class="overlay-content">
@@ -217,18 +217,17 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0.98);
-    width: 42%;
-    max-width: 420px;
-    min-width: 260px;
+    width: 55%;
+    max-width: 550px;
+    min-width: 320px;
     z-index: 10;
     border-radius: 6px;
     overflow: hidden;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 8px 24px rgba(0, 0, 0, 0.5);
     transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1), 
-                box-shadow 0.8s cubic-bezier(0.23, 1, 0.32, 1),
-                border-color 0.6s ease;
+                box-shadow 0.8s cubic-bezier(0.23, 1, 0.32, 1);
     pointer-events: none;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: none;
     backdrop-filter: blur(0.5px);
     will-change: transform, box-shadow;
   }
@@ -248,7 +247,6 @@
   .work-item-image:hover .center-image-overlay {
     transform: translate(-50%, -50%) scale(1.05) translateY(-8px);
     box-shadow: 0 28px 90px rgba(0, 0, 0, 0.75), 0 16px 40px rgba(0, 0, 0, 0.65);
-    border-color: rgba(255, 255, 255, 0.15);
   }
 
   .work-item-image:hover .center-image {
