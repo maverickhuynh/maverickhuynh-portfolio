@@ -11,7 +11,7 @@
   <body>
     <div class="work-page">
       <!-- Navigation -->
-      <nav class="nav">
+      <nav class="nav initial-hidden">
         <span class="nav-text">
           Freshman at USC based in Los Angeles / <a href="/" class="home-link">home</a> / <a href="/work" class="work-link">my work</a>
         </span>
@@ -22,8 +22,8 @@
       <div class="left-side">
         <!-- Bottom corner text -->
         <div class="work-title-bottom">
-          <div class="work-title-line">my</div>
-          <div class="work-title-line">work</div>
+          <div class="work-title-line initial-hidden">my</div>
+          <div class="work-title-line initial-hidden">work</div>
         </div>
       </div>
 
@@ -31,9 +31,12 @@
       <div class="right-side">
         <div class="work-items-container">
           <!-- Work Item 1 -->
-          <div class="work-item">
+          <div class="work-item initial-hidden">
             <div class="work-item-image">
               <img src="/images/IMG_2935 (1).jpg" alt="Work item 1" class="work-image" />
+              <div class="center-image-overlay">
+                <img src="/images/IMG_2930 (1).jpg" alt="Work item 1 center" class="center-image" />
+              </div>
               <div class="image-overlay">
                 <div class="overlay-content">
                   <div class="overlay-title">Founder, NoSolesLost</div>
@@ -44,28 +47,28 @@
           </div>
 
           <!-- Work Item 2 -->
-          <div class="work-item">
+          <div class="work-item initial-hidden">
             <div class="work-item-image">
               <div class="image-placeholder"></div>
             </div>
           </div>
 
           <!-- Work Item 3 -->
-          <div class="work-item">
+          <div class="work-item initial-hidden">
             <div class="work-item-image">
               <div class="image-placeholder"></div>
             </div>
           </div>
 
           <!-- Work Item 4 -->
-          <div class="work-item">
+          <div class="work-item initial-hidden">
             <div class="work-item-image">
               <div class="image-placeholder"></div>
             </div>
           </div>
 
           <!-- Work Item 5 -->
-          <div class="work-item">
+          <div class="work-item initial-hidden">
             <div class="work-item-image">
               <div class="image-placeholder"></div>
             </div>
@@ -73,6 +76,34 @@
         </div>
       </div>
     </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Step 1: Fade in navigation first (200ms delay)
+        const nav = document.querySelector('.nav');
+        setTimeout(() => {
+          if (nav) nav.classList.remove('initial-hidden');
+        }, 200);
+
+        // Step 2: Animate left side title lines sequentially (600ms delay)
+        const titleLines = document.querySelectorAll('.work-title-line');
+        titleLines.forEach((line, index) => {
+          setTimeout(() => {
+            line.classList.remove('initial-hidden');
+            line.classList.add('slide-in');
+          }, 600 + (index * 200)); // 200ms delay between each line
+        });
+
+        // Step 3: Animate work items sequentially (1200ms delay after title starts)
+        const workItems = document.querySelectorAll('.work-item');
+        workItems.forEach((item, index) => {
+          setTimeout(() => {
+            item.classList.remove('initial-hidden');
+            item.classList.add('fade-in-up');
+          }, 1200 + (index * 150)); // 150ms delay between each item
+        });
+      });
+    </script>
   </body>
 </html>
 
@@ -120,10 +151,28 @@
     z-index: 20;
   }
 
+  /* Custom scrollbar */
+  .right-side::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .right-side::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .right-side::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+  }
+
+  .right-side::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
   .work-items-container {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: 4rem;
   }
 
   .work-item {
@@ -137,13 +186,15 @@
     position: relative;
     overflow: hidden;
     cursor: pointer;
-    border-radius: 4px;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease;
+    border-radius: 8px;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    background: #000;
+    will-change: transform;
   }
 
   .work-item-image:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 8px 24px rgba(0, 0, 0, 0.5);
   }
 
   .work-image {
@@ -151,12 +202,58 @@
     height: auto;
     display: block;
     object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), filter 0.4s ease;
+    border-radius: 8px;
+    transition: transform 1s cubic-bezier(0.23, 1, 0.32, 1), filter 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    will-change: transform, filter;
   }
 
   .work-item-image:hover .work-image {
-    filter: brightness(0.35) contrast(1.1);
-    transform: scale(1.05);
+    filter: brightness(0.45) contrast(1.1) saturate(1.1);
+    transform: scale(1.08) translateY(-2px);
+  }
+
+  .center-image-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.98);
+    width: 42%;
+    max-width: 420px;
+    min-width: 260px;
+    z-index: 10;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 8px 24px rgba(0, 0, 0, 0.5);
+    transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1), 
+                box-shadow 0.8s cubic-bezier(0.23, 1, 0.32, 1),
+                border-color 0.6s ease;
+    pointer-events: none;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(0.5px);
+    will-change: transform, box-shadow;
+  }
+
+  .center-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: 6px;
+    opacity: 0.95;
+    transition: opacity 0.6s ease, transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    transform: scale(1);
+    will-change: opacity, transform;
+  }
+
+  .work-item-image:hover .center-image-overlay {
+    transform: translate(-50%, -50%) scale(1.05) translateY(-8px);
+    box-shadow: 0 28px 90px rgba(0, 0, 0, 0.75), 0 16px 40px rgba(0, 0, 0, 0.65);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  .work-item-image:hover .center-image {
+    opacity: 1;
+    transform: scale(1.02);
   }
 
   .image-overlay {
@@ -169,9 +266,16 @@
     align-items: center;
     justify-content: center;
     opacity: 0;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.5) 100%);
-    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.75) 100%);
+    transition: opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1), backdrop-filter 0.6s ease;
     pointer-events: none;
+    z-index: 15;
+    border-radius: 8px;
+    backdrop-filter: blur(0px);
+  }
+
+  .work-item-image:hover .image-overlay {
+    backdrop-filter: blur(2px);
   }
 
   .work-item-image:hover .image-overlay {
@@ -182,12 +286,15 @@
     text-align: center;
     color: white;
     padding: 3rem 2rem;
-    transform: translateY(20px);
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+    transform: translateY(30px) scale(0.95);
+    opacity: 0;
+    transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1) 0.15s,
+                opacity 0.7s cubic-bezier(0.23, 1, 0.32, 1) 0.15s;
   }
 
   .work-item-image:hover .overlay-content {
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+    opacity: 1;
   }
 
   .overlay-title {
@@ -197,8 +304,9 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
     opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.2s, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+    transform: translateY(15px);
+    transition: opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1) 0.25s, 
+                transform 0.6s cubic-bezier(0.23, 1, 0.32, 1) 0.25s;
   }
 
   .work-item-image:hover .overlay-title {
@@ -213,8 +321,9 @@
     letter-spacing: 0.03em;
     line-height: 1.6;
     opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.3s, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+    transform: translateY(15px);
+    transition: opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1) 0.35s, 
+                transform 0.6s cubic-bezier(0.23, 1, 0.32, 1) 0.35s;
   }
 
   .work-item-image:hover .overlay-subtitle {
@@ -225,13 +334,20 @@
   .image-placeholder {
     width: 100%;
     height: 500px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.25);
     font-size: 0.9rem;
+    transition: background 0.3s ease, border-color 0.3s ease;
+  }
+
+  .work-item-image:hover .image-placeholder {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.25);
   }
 
   .work-item-footer {
@@ -318,5 +434,44 @@
     line-height: 1;
     text-transform: lowercase;
     letter-spacing: -0.02em;
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+
+  /* Initial hidden state */
+  .initial-hidden {
+    opacity: 0;
+  }
+
+  /* Navigation fade-in */
+  .nav.initial-hidden {
+    opacity: 0;
+  }
+
+  .nav:not(.initial-hidden) {
+    opacity: 1;
+    transition: opacity 0.6s ease-in;
+  }
+
+  /* Title line slide-in animation */
+  .work-title-line.initial-hidden {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+
+  .work-title-line.slide-in {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Work item fade-in-up animation */
+  .work-item.initial-hidden {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .work-item.fade-in-up {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
   }
 </style>
