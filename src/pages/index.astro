@@ -1,5 +1,6 @@
 ---
 import Scene from '../components/Scene.svelte';
+import ShoeScene from '../components/ShoeScene.svelte';
 ---
 
 <html lang="en">
@@ -7,6 +8,9 @@ import Scene from '../components/Scene.svelte';
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Maverick Huynh - Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   </head>
   <body>
     <Scene client:load />
@@ -129,21 +133,35 @@ import Scene from '../components/Scene.svelte';
         </div>
       </div>
 
+      <!-- Video Section (below belt) -->
+      <section class="video-section">
+        <video
+          class="home-video"
+          src="/videos/Screen Recording 2026-02-15 220307.mp4"
+          autoplay
+          muted
+          loop
+          playsinline
+        ></video>
+      </section>
+
+      <!-- 3D Shoe Section -->
+      <section class="shoe-section">
+        <ShoeScene client:load />
+      </section>
+
       <!-- Photo Gallery Section -->
       <section class="photo-gallery">
         <div class="gallery-container">
-          <div class="gallery-left">
-            <div class="gallery-photos">
-              <img src="/images/890599CB-6805-4E59-A990-7AA2EECA99A3.JPG" alt="Portrait" class="gallery-photo photo-1" />
-              <img src="/images/407A1662.JPG" alt="Portrait on stool" class="gallery-photo photo-2" />
-              <img src="/images/BRAND CAMP 2024-96 (2).jpg" alt="Playing guitar" class="gallery-photo photo-3" />
-            </div>
-            <div class="button-container">
-              <a href="/about" class="about-me-button">about me</a>
-              <a href="/work" class="my-work-button">my work</a>
-            </div>
+          <h2 class="gallery-text gallery-title"></h2>
+          <div class="gallery-photos">
+            <img src="/images/Screenshot 2026-02-15 213729.png" alt="Portrait" class="gallery-photo photo-1" />
+            <img src="/images/407A1662.JPG" alt="Portrait on stool" class="gallery-photo photo-2" />
+            <img src="/images/IMG_7158.jpg" alt="Basketball" class="gallery-photo photo-3" />
           </div>
-          <p class="gallery-text"></p>
+          <div class="button-container">
+            <a href="/about" class="about-me-button">about me</a>
+          </div>
         </div>
       </section>
 
@@ -370,33 +388,23 @@ import Scene from '../components/Scene.svelte';
           
           const observerOptions = {
             root: null,
-            rootMargin: '-100px', // Wait until gallery is 100px into viewport
-            threshold: 0.5 // Trigger when 50% of the gallery is visible
+            rootMargin: '0px 0px -10% 0px', // Trigger when section is 10% from bottom of viewport
+            threshold: [0, 0.1, 0.2]
           };
           
           const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
               if (entry.isIntersecting) {
-                // Fade in photos one by one with delays
-                photos.forEach((photo, index) => {
-                  setTimeout(() => {
-                    photo.classList.add('fade-in');
-                  }, index * 400); // 400ms delay between each photo
-                });
-                
-                // Fade in text letters one by one after the last photo
+                // Fade in text letters one by one
                 if (galleryText) {
                   const letters = galleryText.querySelectorAll('.letter');
-                  const startDelay = photos.length * 400;
-                  
                   letters.forEach((letter, index) => {
                     setTimeout(() => {
                       letter.classList.add('fade-in');
-                    }, startDelay + (index * 30)); // 30ms delay between each letter
+                    }, index * 25);
                   });
                 }
                 
-                // Unobserve after animation starts to prevent re-triggering
                 observer.unobserve(entry.target);
               }
             });
@@ -421,7 +429,11 @@ import Scene from '../components/Scene.svelte';
     min-height: 100vh;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     color: white;
-    background: linear-gradient(180deg, #1a1f3a 0%, #2d3a5f 50%, #4a6fa5 100%);
+    background-color: #000000;
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.12) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+    background-size: 48px 48px;
     background-attachment: fixed;
     overflow-x: hidden;
     overflow-y: auto;
@@ -673,47 +685,90 @@ import Scene from '../components/Scene.svelte';
     }
   }
 
+  /* Video Section (below belt) - full width, cropped height */
+  .video-section {
+    width: 100%;
+    padding: 3rem 0;
+    display: block;
+    z-index: 10;
+    height: 50vh;
+    overflow: hidden;
+  }
+
+  .home-video {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .shoe-section {
+    width: 100%;
+    height: 55vh;
+    min-height: 400px;
+    position: relative;
+    z-index: 10;
+    background: #0c0c0c;
+  }
+
   /* Photo Gallery Section */
   .photo-gallery {
     position: relative;
     width: 100%;
-    padding: 4rem 2rem;
+    max-width: 100vw;
+    box-sizing: border-box;
+    padding: 4rem 2rem 4rem 2rem;
     z-index: 10;
   }
 
   .gallery-container {
     position: relative;
     display: flex;
-    align-items: flex-start;
-    gap: 4rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-  }
-
-  .gallery-left {
-    display: flex;
     flex-direction: column;
     align-items: flex-start;
+    gap: 2.5rem;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
 
   .gallery-photos {
     display: flex;
-    align-items: flex-start;
-    gap: -2rem; /* Negative gap for overlap */
-    margin-left: -6rem; /* Move photos further left */
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    width: 100%;
+    max-width: 100%;
+    flex-wrap: nowrap;
   }
 
-  .gallery-text {
+  .gallery-text.gallery-title {
+    font-family: 'Inter', sans-serif;
     font-size: 2.5rem;
     font-weight: 300;
     line-height: 1.4;
     color: white;
     margin: 0;
-    margin-left: 4rem; /* Move text further to the right */
-    margin-top: 2rem; /* Position the text */
-    flex: 1;
-    max-width: 500px;
+    text-align: left;
+    width: 100%;
+    max-width: 100%;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    white-space: normal;
+  }
+
+  .gallery-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    line-height: 1.4;
+    color: white;
+    margin: 0;
     word-break: keep-all;
     overflow-wrap: break-word;
     white-space: normal;
@@ -727,7 +782,7 @@ import Scene from '../components/Scene.svelte';
   .gallery-text .letter {
     display: inline;
     opacity: 0;
-    transition: opacity 0.6s ease-out;
+    transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   .gallery-text .letter.fade-in {
@@ -739,63 +794,41 @@ import Scene from '../components/Scene.svelte';
   }
 
   .gallery-photo {
-    width: 250px;
-    height: auto;
+    flex: 1;
+    width: 0;
+    min-width: 0;
+    height: 38vh;
     object-fit: cover;
-    border-radius: 4px;
+    border-radius: 0;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    opacity: 0;
-    transform: translateY(-30px);
-    transition: opacity 1.5s ease-out, transform 1.5s ease-out;
-  }
-
-  .gallery-photo.fade-in {
-    opacity: 1;
   }
 
   .photo-1 {
     position: relative;
-    z-index: 1; /* Behind middle photo */
-    transform: translateY(-50px);
-  }
-
-  .photo-1.fade-in {
-    transform: translateY(-20px);
+    object-fit: cover;
+    object-position: 60% center;
   }
 
   .photo-2 {
     position: relative;
-    z-index: 3; /* In front - highest z-index */
-    margin-left: -3rem; /* Overlap */
-    transform: translateY(-20px);
-  }
-
-  .photo-2.fade-in {
-    transform: translateY(10px);
   }
 
   .photo-3 {
     position: relative;
-    z-index: 2; /* Behind middle photo but in front of first */
-    margin-left: -3rem; /* Overlap */
-    transform: translateY(-40px);
-  }
-
-  .photo-3.fade-in {
-    transform: translateY(-10px);
+    object-fit: cover;
+    object-position: 75% center;
   }
 
 
   .button-container {
     display: flex;
     gap: 1.5rem;
-    margin-top: 2rem;
-    margin-left: -6rem; /* Align with photos */
+    justify-content: flex-start;
   }
 
-  .about-me-button,
-  .my-work-button {
+  .about-me-button {
     display: inline-block;
+    position: relative;
     padding: 1rem 2.5rem;
     font-size: 1.2rem;
     font-weight: 400;
@@ -803,18 +836,30 @@ import Scene from '../components/Scene.svelte';
     text-decoration: none;
     text-transform: lowercase;
     letter-spacing: 0.1em;
-    border: 2px solid transparent; /* Transparent border to maintain spacing */
-    transition: all 0.3s ease;
+    transition: color 0.4s ease, letter-spacing 0.4s ease, transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
     background: transparent;
+    overflow: hidden;
   }
 
-  .about-me-button:hover,
-  .my-work-button:hover {
-    border: 2px solid white; /* Show border on hover */
-    background: white;
-    color: #1a1f3a;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+  .about-me-button::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0.5rem;
+    width: 0;
+    height: 1px;
+    background: currentColor;
+    transition: width 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .about-me-button:hover {
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 0.2em;
+    transform: translateX(4px);
+  }
+
+  .about-me-button:hover::after {
+    width: 100%;
   }
 
   /* Footer fade-in */

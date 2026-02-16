@@ -489,7 +489,7 @@
 
         // Calculate distance from mouse - only affect when very close to this specific sphere
         const distanceToMouse = mesh.position.distanceTo(worldMouse);
-        const hitRadius = radius * 2.2; // Increased from 1.8 to 2.2 for larger interaction area
+        const hitRadius = radius * 2.6; // Larger interaction area for more dispersed feel
         
         // Only apply impulse if mouse is very close to THIS sphere
         if (distanceToMouse < hitRadius && distanceToMouse > 0) {
@@ -498,21 +498,21 @@
             .subVectors(mesh.position, worldMouse)
             .normalize();
           
-          // Strong impulse - like knocking a rock
+          // Strong impulse - more dispersed when hovered
           const hitStrength = (1 - distanceToMouse / hitRadius); // Stronger when closer
-          const impulseForce = hitStrength * 0.6; // Increased from 0.3 to 0.6 for further spread
+          const impulseForce = hitStrength * 0.9; // Stronger push for more spread
           
           // Apply impulse to velocity (like knocking it)
           velocity.add(hitDirection.multiplyScalar(impulseForce));
         }
 
-        // Less damping - rocks drift in space longer (more momentum)
-        velocity.multiplyScalar(0.99); // Increased from 0.98 to 0.99 for smoother, slower movement
+        // Less damping - drift longer before settling
+        velocity.multiplyScalar(0.995); // Less friction, takes longer to settle
         
-        // Much weaker return force - drift back very slowly like floating
+        // Very weak return force - takes longer to drift back to middle
         const returnForce = new THREE.Vector3()
           .subVectors(originalPosition, mesh.position)
-          .multiplyScalar(0.005); // Reduced from 0.015 to 0.005 for much slower, smoother return
+          .multiplyScalar(0.002); // Weaker gravity, slower return to center
         velocity.add(returnForce);
         
         // Smooth out velocity changes to prevent jagged movement
