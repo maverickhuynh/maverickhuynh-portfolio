@@ -1,5 +1,6 @@
 ---
 import Scene from '../components/Scene.svelte';
+import CoffeeScene from '../components/CoffeeScene.svelte';
 import ShoeScene from '../components/ShoeScene.svelte';
 ---
 
@@ -145,9 +146,15 @@ import ShoeScene from '../components/ShoeScene.svelte';
         ></video>
       </section>
 
-      <!-- 3D Shoe Section -->
+      <!-- 3D Models Section: Coffee (left) + Shoe (right) -->
       <section class="shoe-section">
-        <ShoeScene client:load />
+        <div class="shoe-section-left">
+          <CoffeeScene client:load />
+        </div>
+        <div class="shoe-section-right">
+          <ShoeScene client:load />
+          <p class="shoe-caption">Founder of NoSolesLost<br /><span class="shoe-caption-hint">(rotate me around)</span></p>
+        </div>
       </section>
 
       <!-- Photo Gallery Section -->
@@ -710,7 +717,35 @@ import ShoeScene from '../components/ShoeScene.svelte';
     min-height: 400px;
     position: relative;
     z-index: 10;
-    background: #0c0c0c;
+    background: transparent;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .shoe-section-left,
+  .shoe-section-right {
+    flex: 1;
+    min-width: 0;
+    position: relative;
+    height: 100%;
+  }
+
+  .shoe-caption {
+    position: absolute;
+    bottom: 9rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: white;
+    margin: 0;
+    text-align: center;
+  }
+
+  .shoe-caption-hint {
+    font-size: 0.7rem;
+    opacity: 0.85;
   }
 
   /* Photo Gallery Section */

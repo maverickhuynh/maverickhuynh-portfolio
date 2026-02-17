@@ -6,37 +6,9 @@
 
   let container;
   let scene, camera, renderer;
-  let shoeModel = null;
+  let coffeeModel = null;
   let teardown = null;
   let loadError = false;
-
-  function applySceneMaterials(meshGroup) {
-    meshGroup.traverse((child) => {
-      if (child.isMesh && child.material) {
-        const mats = Array.isArray(child.material) ? child.material : [child.material];
-        const newMats = mats.map((m) => {
-          let hex = 0x888888;
-          if (m.color && typeof m.color.getHex === 'function') hex = m.color.getHex();
-          const r = (hex >> 16) & 0xff, g = (hex >> 8) & 0xff, b = hex & 0xff;
-          const brightness = (r + g + b) / 3;
-          const color = brightness < 140 ? 0x1a1a1a : 0xeeeeee;
-          return new THREE.MeshStandardMaterial({
-            color,
-            metalness: 0.15,
-            roughness: 0.7,
-            envMapIntensity: 0.3,
-          });
-        });
-        child.material = newMats.length === 1 ? newMats[0] : newMats;
-      } else if (child.isMesh) {
-        child.material = new THREE.MeshStandardMaterial({
-          color: 0x1a1a1a,
-          metalness: 0.15,
-          roughness: 0.7,
-        });
-      }
-    });
-  }
 
   onMount(() => {
     const targetAspect = 2.0;
@@ -59,8 +31,8 @@
 
       scene = new THREE.Scene();
       camera = new THREE.PerspectiveCamera(60, aspect, 0.1, 1000);
-      camera.position.set(-61, -1.6, 4);
-      camera.lookAt(-55, -1.6, 0);
+      camera.position.set(0, 0, 4);
+      camera.lookAt(0, 0, 0);
 
       renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
       renderer.setSize(w, h);
@@ -70,52 +42,46 @@
       container.appendChild(renderer.domElement);
 
       const controls = new OrbitControls(camera, renderer.domElement);
-      controls.target.set(-63, -1.6, 0);
+      controls.target.set(0, 0, 0);
       controls.enableZoom = false;
       controls.enablePan = false;
 
-      // Strong lighting for shading and detail on dark background
       const ambient = new THREE.AmbientLight(0xffffff, 0.9);
       scene.add(ambient);
       const hemi = new THREE.HemisphereLight(0xffffff, 0x333333, 0.7);
       scene.add(hemi);
-      const key = new THREE.DirectionalLight(0xffffff, 1.4);
+      const key = new THREE.DirectionalLight(0xffffff, 1.2);
       key.position.set(3, 4, 3);
       scene.add(key);
-      const fill = new THREE.DirectionalLight(0xffffff, 0.7);
+      const fill = new THREE.DirectionalLight(0xffffff, 0.6);
       fill.position.set(-2, 2, -1);
       scene.add(fill);
-      const rim = new THREE.DirectionalLight(0xffffff, 0.5);
+      const rim = new THREE.DirectionalLight(0xffffff, 0.4);
       rim.position.set(-1, 0.5, -2);
       scene.add(rim);
 
       const loader = new GLTFLoader();
       loader.load(
-        '/models/Trainer.glb',
+        '/models/Coffee cup.glb',
         (gltf) => {
-          shoeModel = gltf.scene;
-          scene.add(shoeModel);
+          coffeeModel = gltf.scene;
+          scene.add(coffeeModel);
 
-          const box = new THREE.Box3().setFromObject(shoeModel);
+          const box = new THREE.Box3().setFromObject(coffeeModel);
           const center = box.getCenter(new THREE.Vector3());
           const size = box.getSize(new THREE.Vector3());
-          shoeModel.position.sub(center);
+          coffeeModel.position.sub(center);
 
           const maxDim = Math.max(size.x, size.y, size.z) || 1;
-          const scale = 3.8 / maxDim;
-          shoeModel.scale.setScalar(scale);
-          applySceneMaterials(shoeModel);
+          const scale = 2.5 / maxDim;
+          coffeeModel.scale.setScalar(scale);
 
-          shoeModel.rotation.y = Math.PI * 0.25;
-          shoeModel.position.x = -66.0;
-          shoeModel.position.y = -1.6;
-          controls.target.copy(shoeModel.position);
           if (renderer && scene && camera) renderer.render(scene, camera);
         },
         undefined,
         (err) => {
           loadError = true;
-          console.error('Error loading Trainer.glb', err);
+          console.error('Error loading Coffee cup.glb', err);
         }
       );
 
@@ -124,7 +90,7 @@
         if (!animating || !renderer || !container?.parentElement) return;
         requestAnimationFrame(animate);
         controls.update();
-        if (shoeModel) shoeModel.rotation.y += 0.002;
+        if (coffeeModel) coffeeModel.rotation.y += 0.002;
         renderer.render(scene, camera);
       }
       animate();
@@ -162,15 +128,15 @@
   });
 </script>
 
-<div class="shoe-scene">
-  <div bind:this={container} class="shoe-scene-inner"></div>
+<div class="coffee-scene">
+  <div bind:this={container} class="coffee-scene-inner"></div>
   {#if loadError}
-    <p class="shoe-scene-message">3D model not found. Add <strong>Trainer.glb</strong> to the folder <strong>public/models/</strong> in your project, then refresh.</p>
+    <p class="coffee-scene-message">3D model not found. Add <strong>Coffee cup.glb</strong> to <strong>public/models/</strong>, then refresh.</p>
   {/if}
 </div>
 
 <style>
-  .shoe-scene {
+  .coffee-scene {
     width: 100%;
     height: 100%;
     min-height: 55vh;
@@ -178,7 +144,7 @@
     position: relative;
   }
 
-  .shoe-scene-inner {
+  .coffee-scene-inner {
     width: 100%;
     height: 100%;
     min-height: 55vh;
@@ -187,7 +153,7 @@
     align-items: center;
   }
 
-  .shoe-scene-message {
+  .coffee-scene-message {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -203,7 +169,7 @@
     text-align: center;
   }
 
-  :global(.shoe-scene canvas) {
+  :global(.coffee-scene canvas) {
     display: block;
     flex: 0 0 auto;
     max-width: 100%;
