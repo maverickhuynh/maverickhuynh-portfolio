@@ -480,9 +480,9 @@
       spheres.forEach((sphereData, i) => {
         const { mesh, originalPosition, currentTarget, velocity, radius, speed, rotation } = sphereData;
         
-        // Update time uniform for iridescent animation
+        // Update time uniform for iridescent animation (slow, smooth to avoid strobe)
         if (mesh.material.uniforms && mesh.material.uniforms.time) {
-          mesh.material.uniforms.time.value += 0.01;
+          mesh.material.uniforms.time.value += 0.004;
         }
         
         // Spheres are no longer rotating for stability

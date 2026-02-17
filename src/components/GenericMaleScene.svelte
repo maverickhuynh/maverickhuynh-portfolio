@@ -11,8 +11,53 @@
   let loadError = false;
   let loading = true;
 
+  function setMeshColor(child, colorHex) {
+    const mat = child.material;
+    const mats = Array.isArray(mat) ? mat : [mat];
+    child.material = mats.length === 1
+      ? new THREE.MeshStandardMaterial({
+          color: colorHex,
+          metalness: (mats[0].metalness !== undefined) ? mats[0].metalness : 0.15,
+          roughness: (mats[0].roughness !== undefined) ? mats[0].roughness : 0.7,
+        })
+      : mats.map(() => new THREE.MeshStandardMaterial({
+          color: colorHex,
+          metalness: 0.15,
+          roughness: 0.7,
+        }));
+  }
+
+  function applyShoeColor(meshGroup, colorHex) {
+    const box = new THREE.Box3().setFromObject(meshGroup);
+    const center = box.getCenter(new THREE.Vector3());
+    meshGroup.traverse((child) => {
+      if (!child.isMesh || !child.material) return;
+      const name = (child.name || '').toLowerCase();
+      const isShoeByName = name.includes('foot') || name.includes('shoe') || name.includes('feet') || name.includes('boot') || name.includes('toe') || name.includes('ankle');
+      const isFacePart = name.includes('eye') || name.includes('nose') || name.includes('face') || name.includes('head') || name.includes('ear');
+      if (isShoeByName) {
+        setMeshColor(child, colorHex);
+        return;
+      }
+      const mats = Array.isArray(child.material) ? child.material : [child.material];
+      const firstMat = mats[0];
+      let brightness = 128;
+      if (firstMat.color && typeof firstMat.color.getHex === 'function') {
+        const hex = firstMat.color.getHex();
+        const r = (hex >> 16) & 0xff, g = (hex >> 8) & 0xff, b = hex & 0xff;
+        brightness = (r + g + b) / 3;
+      }
+      const childBox = new THREE.Box3().setFromObject(child);
+      const childCenter = childBox.getCenter(new THREE.Vector3());
+      const isLowerBody = childCenter.y < center.y - 0.01;
+      if (brightness < 120 && isLowerBody && !isFacePart) {
+        setMeshColor(child, colorHex);
+      }
+    });
+  }
+
   onMount(() => {
-    const targetAspect = 2.0;
+    const targetAspect = 1.5;
     function getSize() {
       const cw = container.clientWidth || 800;
       const ch = Math.max(container.clientHeight, 400) || 400;
@@ -47,17 +92,17 @@
       controls.enableZoom = false;
       controls.enablePan = false;
 
-      const ambient = new THREE.AmbientLight(0xffffff, 0.9);
+      const ambient = new THREE.AmbientLight(0xffffff, 1.8);
       scene.add(ambient);
-      const hemi = new THREE.HemisphereLight(0xffffff, 0x333333, 0.7);
+      const hemi = new THREE.HemisphereLight(0xffffff, 0x888888, 1.3);
       scene.add(hemi);
-      const key = new THREE.DirectionalLight(0xffffff, 1.2);
+      const key = new THREE.DirectionalLight(0xffffff, 2.0);
       key.position.set(3, 4, 3);
       scene.add(key);
-      const fill = new THREE.DirectionalLight(0xffffff, 0.6);
+      const fill = new THREE.DirectionalLight(0xffffff, 1.2);
       fill.position.set(-2, 2, -1);
       scene.add(fill);
-      const rim = new THREE.DirectionalLight(0xffffff, 0.4);
+      const rim = new THREE.DirectionalLight(0xffffff, 0.95);
       rim.position.set(-1, 0.5, -2);
       scene.add(rim);
 
@@ -66,6 +111,7 @@
         '/models/Generic Male.glb',
         (gltf) => {
           model = gltf.scene;
+          applyShoeColor(model, 0xff8800);
           scene.add(model);
 
           const box = new THREE.Box3().setFromObject(model);
@@ -74,15 +120,18 @@
           model.position.sub(center);
 
           const maxDim = Math.max(size.x, size.y, size.z) || 1;
-          const scale = Math.max(200 / maxDim, 50);
+          const scale = Math.max(500 / maxDim, 50);
           model.scale.setScalar(scale);
 
           model.position.y -= 2.0;
 
-          const dist = 220;
-          const cy = model.position.y;
-          camera.position.set(0, cy, dist);
-          controls.target.set(0, cy, 0);
+          const dist = 280;
+          controls.target.copy(model.position);
+          camera.position.set(
+            model.position.x,
+            model.position.y,
+            model.position.z + dist
+          );
 
           loading = false;
           if (renderer && scene && camera) renderer.render(scene, camera);

@@ -19,20 +19,20 @@
           if (m.color && typeof m.color.getHex === 'function') hex = m.color.getHex();
           const r = (hex >> 16) & 0xff, g = (hex >> 8) & 0xff, b = hex & 0xff;
           const brightness = (r + g + b) / 3;
-          const color = brightness < 140 ? 0x1a1a1a : 0xeeeeee;
+          const color = brightness < 140 ? 0xff4444 : 0xffffff;
           return new THREE.MeshStandardMaterial({
             color,
-            metalness: 0.15,
-            roughness: 0.7,
-            envMapIntensity: 0.3,
+            metalness: 0.12,
+            roughness: 0.6,
+            envMapIntensity: 0.5,
           });
         });
         child.material = newMats.length === 1 ? newMats[0] : newMats;
       } else if (child.isMesh) {
         child.material = new THREE.MeshStandardMaterial({
-          color: 0x1a1a1a,
-          metalness: 0.15,
-          roughness: 0.7,
+          color: 0xff4444,
+          metalness: 0.12,
+          roughness: 0.6,
         });
       }
     });
@@ -75,17 +75,17 @@
       controls.enablePan = false;
 
       // Strong lighting for shading and detail on dark background
-      const ambient = new THREE.AmbientLight(0xffffff, 0.9);
+      const ambient = new THREE.AmbientLight(0xffffff, 1.6);
       scene.add(ambient);
-      const hemi = new THREE.HemisphereLight(0xffffff, 0x333333, 0.7);
+      const hemi = new THREE.HemisphereLight(0xffffff, 0x666666, 1.1);
       scene.add(hemi);
-      const key = new THREE.DirectionalLight(0xffffff, 1.4);
+      const key = new THREE.DirectionalLight(0xffffff, 1.9);
       key.position.set(3, 4, 3);
       scene.add(key);
-      const fill = new THREE.DirectionalLight(0xffffff, 0.7);
+      const fill = new THREE.DirectionalLight(0xffffff, 1.1);
       fill.position.set(-2, 2, -1);
       scene.add(fill);
-      const rim = new THREE.DirectionalLight(0xffffff, 0.5);
+      const rim = new THREE.DirectionalLight(0xffffff, 0.85);
       rim.position.set(-1, 0.5, -2);
       scene.add(rim);
 

@@ -46,17 +46,17 @@
       controls.enableZoom = false;
       controls.enablePan = false;
 
-      const ambient = new THREE.AmbientLight(0xffffff, 0.9);
+      const ambient = new THREE.AmbientLight(0xffffff, 1.6);
       scene.add(ambient);
-      const hemi = new THREE.HemisphereLight(0xffffff, 0x333333, 0.7);
+      const hemi = new THREE.HemisphereLight(0xffffff, 0x666666, 1.1);
       scene.add(hemi);
-      const key = new THREE.DirectionalLight(0xffffff, 1.2);
+      const key = new THREE.DirectionalLight(0xffffff, 1.8);
       key.position.set(3, 4, 3);
       scene.add(key);
-      const fill = new THREE.DirectionalLight(0xffffff, 0.6);
+      const fill = new THREE.DirectionalLight(0xffffff, 1.0);
       fill.position.set(-2, 2, -1);
       scene.add(fill);
-      const rim = new THREE.DirectionalLight(0xffffff, 0.4);
+      const rim = new THREE.DirectionalLight(0xffffff, 0.75);
       rim.position.set(-1, 0.5, -2);
       scene.add(rim);
 
