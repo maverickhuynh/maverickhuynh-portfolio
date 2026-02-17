@@ -1,6 +1,7 @@
 ---
 import Scene from '../components/Scene.svelte';
 import CoffeeScene from '../components/CoffeeScene.svelte';
+import GenericMaleScene from '../components/GenericMaleScene.svelte';
 import ShoeScene from '../components/ShoeScene.svelte';
 ---
 
@@ -146,10 +147,13 @@ import ShoeScene from '../components/ShoeScene.svelte';
         ></video>
       </section>
 
-      <!-- 3D Models Section: Coffee (left) + Shoe (right) -->
+      <!-- 3D Models Section: Coffee (left) | Generic Male (center) | Shoe (right) -->
       <section class="shoe-section">
         <div class="shoe-section-left">
           <CoffeeScene client:load />
+        </div>
+        <div class="shoe-section-center">
+          <GenericMaleScene client:load />
         </div>
         <div class="shoe-section-right">
           <ShoeScene client:load />
@@ -726,6 +730,13 @@ import ShoeScene from '../components/ShoeScene.svelte';
   .shoe-section-right {
     flex: 1;
     min-width: 0;
+    position: relative;
+    height: 100%;
+  }
+
+  .shoe-section-center {
+    flex: 1;
+    min-width: 200px;
     position: relative;
     height: 100%;
   }
