@@ -74,6 +74,11 @@
       controls.enableZoom = false;
       controls.enablePan = false;
 
+      const raycaster = new THREE.Raycaster();
+      const mouse = new THREE.Vector2();
+      let isHovering = false;
+      let baseScale = 1;
+
       // Strong lighting for shading and detail on dark background
       const ambient = new THREE.AmbientLight(0xffffff, 1.6);
       scene.add(ambient);
@@ -102,8 +107,8 @@
           shoeModel.position.sub(center);
 
           const maxDim = Math.max(size.x, size.y, size.z) || 1;
-          const scale = 3.8 / maxDim;
-          shoeModel.scale.setScalar(scale);
+          baseScale = 3.8 / maxDim;
+          shoeModel.scale.setScalar(baseScale);
           applySceneMaterials(shoeModel);
 
           shoeModel.rotation.y = Math.PI * 0.25;
@@ -119,12 +124,32 @@
         }
       );
 
+      const canvas = renderer.domElement;
+      function onMouseMove(event) {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+        mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+        raycaster.setFromCamera(mouse, camera);
+        if (shoeModel) {
+          const intersects = raycaster.intersectObject(shoeModel, true);
+          isHovering = intersects.length > 0;
+        }
+      }
+      function onMouseLeave() {
+        isHovering = false;
+      }
+      canvas.addEventListener('mousemove', onMouseMove);
+      canvas.addEventListener('mouseleave', onMouseLeave);
+
       let animating = true;
       function animate() {
         if (!animating || !renderer || !container?.parentElement) return;
         requestAnimationFrame(animate);
         controls.update();
-        if (shoeModel) shoeModel.rotation.y += 0.002;
+        if (shoeModel) {
+          shoeModel.rotation.y += 0.002;
+          shoeModel.scale.setScalar(isHovering ? baseScale * 1.08 : baseScale);
+        }
         renderer.render(scene, camera);
       }
       animate();
@@ -140,6 +165,8 @@
 
       return () => {
         animating = false;
+        canvas.removeEventListener('mousemove', onMouseMove);
+        canvas.removeEventListener('mouseleave', onMouseLeave);
         controls.dispose();
         window.removeEventListener('resize', handleResize);
         if (renderer) {

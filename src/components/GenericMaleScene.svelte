@@ -92,6 +92,11 @@
       controls.enableZoom = false;
       controls.enablePan = false;
 
+      const raycaster = new THREE.Raycaster();
+      const mouse = new THREE.Vector2();
+      let isHovering = false;
+      let baseScale = 1;
+
       const ambient = new THREE.AmbientLight(0xffffff, 1.8);
       scene.add(ambient);
       const hemi = new THREE.HemisphereLight(0xffffff, 0x888888, 1.3);
@@ -120,8 +125,8 @@
           model.position.sub(center);
 
           const maxDim = Math.max(size.x, size.y, size.z) || 1;
-          const scale = Math.max(500 / maxDim, 50);
-          model.scale.setScalar(scale);
+          baseScale = Math.max(500 / maxDim, 50);
+          model.scale.setScalar(baseScale);
 
           model.position.y -= 2.0;
 
@@ -134,9 +139,10 @@
           );
 
           loading = false;
+          loadError = false;
           if (renderer && scene && camera) renderer.render(scene, camera);
           requestAnimationFrame(() => handleResize());
-          console.log('Generic Male.glb loaded', { maxDim, scale });
+          console.log('Generic Male.glb loaded', { maxDim, scale: baseScale });
         },
         undefined,
         (err) => {
@@ -146,12 +152,32 @@
         }
       );
 
+      const canvas = renderer.domElement;
+      function onMouseMove(event) {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+        mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+        raycaster.setFromCamera(mouse, camera);
+        if (model) {
+          const intersects = raycaster.intersectObject(model, true);
+          isHovering = intersects.length > 0;
+        }
+      }
+      function onMouseLeave() {
+        isHovering = false;
+      }
+      canvas.addEventListener('mousemove', onMouseMove);
+      canvas.addEventListener('mouseleave', onMouseLeave);
+
       let animating = true;
       function animate() {
         if (!animating || !renderer || !container?.parentElement) return;
         requestAnimationFrame(animate);
         controls.update();
-        if (model) model.rotation.y += 0.002;
+        if (model) {
+          model.rotation.y += 0.002;
+          model.scale.setScalar(isHovering ? baseScale * 1.08 : baseScale);
+        }
         renderer.render(scene, camera);
       }
       animate();
@@ -167,6 +193,8 @@
 
       return () => {
         animating = false;
+        canvas.removeEventListener('mousemove', onMouseMove);
+        canvas.removeEventListener('mouseleave', onMouseLeave);
         controls.dispose();
         window.removeEventListener('resize', handleResize);
         if (renderer) {
