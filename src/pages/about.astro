@@ -114,11 +114,16 @@
     top: 0;
     left: 0;
     right: 0;
-    padding: 1.75rem 2rem;
+    padding: 0.65rem 2rem;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     z-index: 100;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
   }
 
   .nav-text {
@@ -160,7 +165,7 @@
     width: 100%;
     margin: 0;
     padding: 0;
-    padding-top: 5.5rem; /* Space below navigation (1.75rem padding + nav content) */
+    padding-top: 3.5rem; /* Space below navigation */
     overflow: hidden;
   }
 
