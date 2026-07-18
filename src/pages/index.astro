@@ -9,7 +9,7 @@ import Scene from '../components/Scene.svelte';
     <title>Maverick Huynh - Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet" />
   </head>
   <body>
     <Scene client:load />
@@ -18,9 +18,8 @@ import Scene from '../components/Scene.svelte';
       <!-- Navigation -->
       <nav class="nav initial-hidden">
         <span class="nav-text">
-          Freshman at USC based in Los Angeles / <a href="/" class="home-link">home</a>
+          Sophomore at USC based in Los Angeles / <a href="/" class="home-link">home</a>
         </span>
-        <div class="menu-icon">☰</div>
       </nav>
 
       <!-- Hero Section -->
@@ -132,89 +131,133 @@ import Scene from '../components/Scene.svelte';
         </div>
       </div>
 
-      <!-- Video Section (below belt) -->
-      <section class="video-section section-card">
-        <video
-          class="home-video"
-          data-src="/videos/Screen Recording 2026-02-15 220307.mp4"
-          autoplay
-          muted
-          loop
-          playsinline
-        ></video>
-      </section>
-
       <!-- Photo Gallery Section -->
       <section class="photo-gallery section-card">
-        <!-- Floating Mav badge (visible only when this section is in view) -->
-        <div class="floating-mav" aria-hidden="true">
-          <div class="floating-mav-badge">Mav</div>
-        </div>
         <div class="gallery-cards-list">
-          <div class="gallery-glass-box">
-            <div class="gallery-container">
-              <div class="gallery-image-frame">
-                <img src="/images/IMG_7158.jpg" alt="" class="gallery-side-image" />
+          <div class="projects-section" id="projects">
+            <div class="projects-atmosphere" aria-hidden="true">
+              <span class="projects-blob projects-blob-1"></span>
+              <span class="projects-blob projects-blob-2"></span>
+              <span class="projects-blob projects-blob-3"></span>
+            </div>
+
+          <h2 class="projects-title">Projects</h2>
+          <p class="projects-intro">
+            I'm currently interning with Bank of America through their Student Leaders program at the
+            Boys &amp; Girls Club of Burbank, and with NASA through their L'SPACE Academy, leading
+            programmatics and logistics for a lunar base monitoring project. Here is some of the work I've done across different work experiences and projects so far!
+          </p>
+
+          <div class="projects-list">
+          <a href="/projects/bank-of-america" class="project-card" data-astro-prefetch>
+            <div class="project-card-image">
+              <img src="/images/BAC-e7995069.png" alt="Bank of America" />
+            </div>
+            <div class="project-card-caption">
+              <h3 class="project-card-title">Bank of America</h3>
+              <p class="project-card-description">2026 Bank of America Student Leader Intern</p>
+              <span class="project-card-tag">Internship</span>
+            </div>
+          </a>
+          <a href="/projects/lspace" class="project-card" data-astro-prefetch>
+            <div class="project-card-image">
+              <img src="/images/lspace_logo_blk-02.png" alt="L'SPACE" />
+            </div>
+            <div class="project-card-caption">
+              <h3 class="project-card-title">L'SPACE</h3>
+              <p class="project-card-description">Programmatics and logistics lead for O.R.I.O.N., a proposed lunar base monitoring network</p>
+              <span class="project-card-tag">NASA L'SPACE NPWEE Program</span>
+            </div>
+          </a>
+          <a href="/projects/nosoleslost" class="project-card" data-astro-prefetch>
+            <div class="project-card-image">
+              <img src="/images/Screenshot%202025-12-07%20191900-Picsart-BackgroundRemover.png" alt="NoSolesLost" />
+            </div>
+            <div class="project-card-caption">
+              <h3 class="project-card-title">NoSolesLost</h3>
+              <p class="project-card-description">Custom hand-painted sneakers, started at 14 during COVID and grew into my first real business.</p>
+              <span class="project-card-tag">Business &middot; Founder</span>
+            </div>
+          </a>
+          <a href="/projects/cafe-dulce" class="project-card" data-astro-prefetch>
+            <div class="project-card-image">
+              <img src="/images/images-Picsart-BackgroundRemover.png" alt="Café Dulce: Systems Redesign" />
+            </div>
+            <div class="project-card-caption">
+              <h3 class="project-card-title">Café Dulce: Systems Redesign</h3>
+              <p class="project-card-description">Systems engineering analysis of Café Dulce's ordering flow, redesigning the layout and building a mobile order MVP to cut congestion and wait times.</p>
+              <span class="project-card-tag">Systems Engineering &middot; Team Project</span>
+            </div>
+          </a>
+          <a href="/projects/amiya-health" class="project-card" data-astro-prefetch>
+            <div class="project-card-image">
+              <img src="/images/A16z-Emblem.png" alt="Amiya Health" />
+            </div>
+            <div class="project-card-caption">
+              <h3 class="project-card-title">Amiya Health</h3>
+              <p class="project-card-description">AI-powered virtual checkup platform making telehealth accessible for seniors, built at my first hackathon with a16z.</p>
+              <span class="project-card-tag">Healthcare &middot; Hackathon</span>
+            </div>
+          </a>
+          <a href="#" class="project-card">
+            <div class="project-card-image">
+              <img src="/images/BRAND%20CAMP%202024-96%20(1)-Picsart-BackgroundRemover.jpg" alt="Project" />
+            </div>
+            <div class="project-card-caption">
+              <h3 class="project-card-title">Project title</h3>
+              <p class="project-card-description">Add a one-line description of this project.</p>
+              <span class="project-card-tag">Category &middot; Type</span>
+            </div>
+          </a>
+          </div>
+          </div>
+
+          <section id="about" class="about-glass-panel">
+            <div class="about-glass-image">
+              <img src="/images/094178B4-86BD-46A0-947B-6013A783A267%20(2).jpg" alt="Maverick Huynh" />
+            </div>
+            <h2 class="about-glass-title">background</h2>
+            <p class="about-glass-subtitle">
+              Started painting shoes in my garage at <span class="about-highlight">12 years old</span>. Haven't looked back since
+            </p>
+
+            <div class="about-young-photo">
+              <div class="about-young-photo-frame about-young-photo-shoe">
+                <img
+                  src="/images/Screenshot%202026-07-17%20at%201.50.47%E2%80%AFPM.png"
+                  alt="Maverick at 12 painting shoes in the garage"
+                />
+                <div class="about-young-callout" aria-hidden="true">
+                  <span class="about-young-label">pic was taken in 2020</span>
+                </div>
               </div>
-              <div class="gallery-text-block">
-                <h2 class="gallery-text gallery-title"></h2>
-                <div class="button-container">
-                  <a href="/about" class="about-me-button">about me</a>
+              <div class="about-young-photo-frame about-young-photo-band">
+                <img
+                  src="/images/Screenshot%202026-07-17%20140758.png"
+                  alt="Maverick performing guitar on stage"
+                />
+                <div class="about-young-callout about-young-callout-band" aria-hidden="true">
+                  <span class="about-young-label about-young-label-band">guitar was bigger than me lol</span>
                 </div>
               </div>
             </div>
-          </div>
-          <h2 class="my-work-title">My Work</h2>
-          <div class="gallery-glass-box">
-            <div class="gallery-container">
-              <div class="gallery-image-frame">
-                <img src="/images/Screenshot_2026-02-24_000145-removebg-preview.png" alt="" class="gallery-side-image" />
+
+            <div class="about-glass-content">
+              <div class="about-glass-left">
+                <p>Growing up, it wasn't "pick one," it was pick all of them: piano, guitar, saxophone, basketball, lacrosse, and get good at every single one. My parents weren't full tiger-parent, but they pushed my standards up early and never let me settle.</p>
+                <p>Looking back, I couldn't be more grateful for it. Without that first push, I wouldn't be anywhere close to where I am now. They set the blueprint, and now it's on me to keep building on it myself. I'm a sophomore at USC in Los Angeles, still running on that same fire.</p>
               </div>
-              <div class="gallery-text-block">
-                <h2 class="gallery-text gallery-title"></h2>
-              </div>
-            </div>
-          </div>
-          <div class="gallery-glass-box">
-            <div class="gallery-container">
-              <div class="gallery-image-frame">
-                <img src="/images/A16z-Emblem.png" alt="" class="gallery-side-image" />
-              </div>
-              <div class="gallery-text-block">
-                <h2 class="gallery-text gallery-title"></h2>
+              <div class="about-glass-right">
+                <h3 class="about-fun-facts-title">Fun facts about me:</h3>
+                <ul class="about-fun-facts-list">
+                  <li><span class="about-fun-fact-icon">🎸</span><span class="about-fun-fact-text">I played electric guitar in a band when I was in 5th grade and performed weekly at a restaurant called Shotski's</span></li>
+                  <li><span class="about-fun-fact-icon">🎷</span><span class="about-fun-fact-text">I played saxophone from 5th grade to senior year of high school</span></li>
+                  <li><span class="about-fun-fact-icon">👟</span><span class="about-fun-fact-text">I painted a custom Air Force 1 for someone on the San Diego Padres</span></li>
+                  <li><span class="about-fun-fact-icon">✈️</span><span class="about-fun-fact-text">I wasn't named after Top Gun</span></li>
+                </ul>
               </div>
             </div>
-          </div>
-          <div class="gallery-glass-box">
-            <div class="gallery-container">
-              <div class="gallery-image-frame">
-                <div class="gallery-image-placeholder"></div>
-              </div>
-              <div class="gallery-text-block">
-                <h2 class="gallery-text gallery-title"></h2>
-              </div>
-            </div>
-          </div>
-          <div class="gallery-glass-box">
-            <div class="gallery-container">
-              <div class="gallery-image-frame">
-                <div class="gallery-image-placeholder"></div>
-              </div>
-              <div class="gallery-text-block">
-                <h2 class="gallery-text gallery-title"></h2>
-              </div>
-            </div>
-          </div>
-          <div class="gallery-glass-box">
-            <div class="gallery-container">
-              <div class="gallery-image-frame">
-                <div class="gallery-image-placeholder"></div>
-              </div>
-              <div class="gallery-text-block">
-                <h2 class="gallery-text gallery-title"></h2>
-              </div>
-            </div>
-          </div>
+          </section>
         </div>
       </section>
 
@@ -256,7 +299,7 @@ import Scene from '../components/Scene.svelte';
                 
                 // Text cycling animation
                 const titleText = title.querySelector('.title-text');
-                const texts = ['industrial and systems engineer.', 'founder.', 'designer.'];
+                const texts = ['industrial and systems engineer.', 'product developer.', 'designer.'];
                 let currentIndex = 0;
                 
                 // Set initial text
@@ -412,85 +455,24 @@ import Scene from '../components/Scene.svelte';
           });
         });
 
-        // Video lazy load: only load and play when section is in view
-        const videoSection = document.querySelector('.video-section');
-        const homeVideo = document.querySelector('.home-video');
-        if (videoSection && homeVideo) {
-          const videoSrc = homeVideo.getAttribute('data-src');
-          if (videoSrc) {
-            const videoObserver = new IntersectionObserver(
-              (entries) => {
-                entries.forEach((entry) => {
-                  if (!entry.isIntersecting) return;
-                  homeVideo.src = videoSrc;
-                  homeVideo.load();
-                  homeVideo.play().catch(() => {});
-                  videoObserver.unobserve(videoSection);
-                });
-              },
-              { rootMargin: '50px', threshold: 0.1 }
-            );
-            videoObserver.observe(videoSection);
-          }
-        }
-
-        // Photo gallery fade-in on scroll
-        const photoGallery = document.querySelector('.photo-gallery');
-        const galleryText = document.querySelector('.gallery-text');
-        
-        if (photoGallery && galleryText) {
-          // Split text into words and letters, wrap words in spans
-          const text = 'Born in Oregon, raised in New Jersey — currently studying ISE and learning how to challenge my own limits.';
-          const words = text.split(' ');
-          galleryText.innerHTML = words.map((word, wordIndex) => {
-            const letters = word.split('');
-            const letterSpans = letters.map((char, index) => {
-              return `<span class="letter" data-index="${wordIndex}-${index}">${char}</span>`;
-            }).join('');
-            const wordSpan = `<span class="word">${letterSpans}</span>`;
-            // Add space after each word except the last one
-            return wordIndex < words.length - 1 ? wordSpan + '<span class="letter space"> </span>' : wordSpan;
-          }).join('');
-          
-          const observerOptions = {
-            root: null,
-            rootMargin: '0px 0px -10% 0px', // Trigger when section is 10% from bottom of viewport
-            threshold: [0, 0.1, 0.2]
-          };
-          
-          const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                // Fade in text letters one by one
-                if (galleryText) {
-                  const letters = galleryText.querySelectorAll('.letter');
-                  letters.forEach((letter, index) => {
-                    setTimeout(() => {
-                      letter.classList.add('fade-in');
-                    }, index * 25);
-                  });
-                }
-                
-                observer.unobserve(entry.target);
-              }
-            });
-          }, observerOptions);
-          
-          observer.observe(photoGallery);
-        }
-
-        // Show floating Mav badge only when photo-gallery section is in view
-        const floatingMav = document.querySelector('.floating-mav');
-        if (photoGallery && floatingMav) {
-          const mavObserver = new IntersectionObserver(
+        // Highlight "12 years old" when the about subtitle scrolls into view
+        const aboutSubtitle = document.querySelector('.about-glass-subtitle');
+        const aboutHighlight = document.querySelector('.about-highlight');
+        if (aboutSubtitle && aboutHighlight) {
+          const highlightObserver = new IntersectionObserver(
             (entries) => {
               entries.forEach((entry) => {
-                floatingMav.classList.toggle('floating-mav-visible', entry.isIntersecting);
+                if (!entry.isIntersecting) return;
+                aboutHighlight.classList.add('is-highlighted');
+                highlightObserver.disconnect();
               });
             },
-            { threshold: 0.2, rootMargin: '0px' }
+            {
+              threshold: 0.5,
+              rootMargin: '0px 0px -15% 0px',
+            }
           );
-          mavObserver.observe(photoGallery);
+          highlightObserver.observe(aboutSubtitle);
         }
       });
     </script>
@@ -500,19 +482,18 @@ import Scene from '../components/Scene.svelte';
 <style is:global>
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   html, body {
     margin: 0;
     padding: 0 2.5rem;
     width: 100%;
+    max-width: 100%;
     min-height: 100vh;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     color: #111;
-    background-color: #faf4ef;
-    background-image: radial-gradient(circle, rgba(0, 0, 0, 0.08) 2px, transparent 2px);
-    background-size: 48px 48px;
-    background-attachment: fixed;
+    background-color: #f5f5f7;
     overflow-x: hidden;
     overflow-y: auto;
     box-sizing: border-box;
@@ -524,7 +505,7 @@ import Scene from '../components/Scene.svelte';
     z-index: 1;
     width: 100%;
     max-width: 100%;
-    margin: 0 2.5rem 2rem 2rem;
+    margin: 0 0 2rem 0;
     overflow: hidden;
     box-sizing: border-box;
     min-width: 0;
@@ -535,23 +516,6 @@ import Scene from '../components/Scene.svelte';
     z-index: 10;
     pointer-events: auto;
     transition: opacity 0.3s ease-in-out;
-  }
-
-  /* Grid layer only below the hero so hero + spheres stay in front of the grid */
-  .portfolio-content::before {
-    content: '';
-    position: fixed;
-    top: 100vh;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 0;
-    pointer-events: none;
-    background-image: radial-gradient(circle, rgba(0, 0, 0, 0.08) 2px, transparent 2px);
-    background-size: 48px 48px;
-    background-color: transparent;
-    transform: translateZ(0);
-    backface-visibility: hidden;
   }
 
   .portfolio-content.fade-out {
@@ -623,79 +587,6 @@ import Scene from '../components/Scene.svelte';
     opacity: 0.8;
   }
 
-  .menu-icon {
-    font-size: 1.5rem;
-    cursor: pointer;
-  }
-
-  /* Floating Mav badge */
-  .floating-mav {
-    position: fixed;
-    right: 5rem;
-    top: 40%;
-    z-index: 80;
-    pointer-events: none;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.35s ease, visibility 0.35s ease;
-  }
-
-  .floating-mav.floating-mav-visible {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  .floating-mav-badge {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.6rem 1.6rem;
-    background: #e56f3b;
-    color: #fff;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 600;
-    border-radius: 999px;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
-    letter-spacing: 0.04em;
-    pointer-events: auto;
-    animation: mavFloat 14s ease-in-out infinite alternate;
-  }
-
-  .floating-mav-badge::before {
-    content: '';
-    position: absolute;
-    left: -0.5rem;
-    top: -0.75rem;
-    width: 0;
-    height: 0;
-    border-left: 0.55rem solid transparent;
-    border-right: 0.55rem solid transparent;
-    border-bottom: 0.9rem solid #e56f3b;
-    transform: rotate(-40deg);
-    transform-origin: 50% 100%;
-    border-radius: 0 0 0.3rem 0.3rem;
-  }
-
-  @keyframes mavFloat {
-    0% {
-      transform: translate3d(0, -40px, 0) rotate(0deg);
-    }
-    25% {
-      transform: translate3d(-120px, 10px, 0) rotate(-4deg);
-    }
-    50% {
-      transform: translate3d(-60px, 60px, 0) rotate(3deg);
-    }
-    75% {
-      transform: translate3d(-180px, -20px, 0) rotate(-3deg);
-    }
-    100% {
-      transform: translate3d(-90px, 30px, 0) rotate(2deg);
-    }
-  }
-
   /* Hero fade-in */
   .hero {
     position: relative;
@@ -736,8 +627,8 @@ import Scene from '../components/Scene.svelte';
 
   .name {
     font-family: 'Inter', sans-serif;
-    font-size: 8rem;
-    font-weight: 600;
+    font-size: 3.25rem;
+    font-weight: 700;
     letter-spacing: 0.1em;
     margin: 0;
     line-height: 1;
@@ -766,7 +657,7 @@ import Scene from '../components/Scene.svelte';
   }
 
   .title {
-    font-size: 3rem;
+    font-size: 2rem;
     margin-top: 3rem;
     margin-left: auto;
     margin-right: auto;
@@ -796,7 +687,7 @@ import Scene from '../components/Scene.svelte';
     background: transparent;
     overflow: hidden;
     z-index: 15;
-    margin: 4rem 2.5rem 0 2.5rem;
+    margin: 4rem 2.5rem 2rem 2.5rem;
     padding: 0 1rem;
     box-sizing: border-box;
   }
@@ -871,28 +762,6 @@ import Scene from '../components/Scene.svelte';
     100% {
       transform: translateX(-33.333%);
     }
-  }
-
-  /* Video Section (below belt) - full width, cropped height */
-  .video-section {
-    width: 100%;
-    padding: 0.5rem 0 3rem 0;
-    display: block;
-    z-index: 10;
-    height: 50vh;
-    overflow: hidden;
-    box-sizing: border-box;
-    border-radius: 1rem;
-  }
-
-  .home-video {
-    width: 100%;
-    height: 100%;
-    max-width: none;
-    display: block;
-    object-fit: cover;
-    object-position: center center;
-    border-radius: 1rem;
   }
 
   .shoe-section {
@@ -994,18 +863,21 @@ import Scene from '../components/Scene.svelte';
   .photo-gallery {
     position: relative;
     width: 100%;
-    max-width: 100vw;
+    max-width: 100%;
     box-sizing: border-box;
     padding: 0.75rem 2rem 2.5rem 0;
-    margin-top: -3rem;
+    margin-top: 1.5rem;
     z-index: 10;
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
+    overflow-x: clip;
   }
 
-  /* Align with video section and allow hover scale without clipping */
+  /* Allow hover scale without clipping cards */
   .photo-gallery.section-card {
-    overflow: visible;
+    overflow-x: clip;
+    overflow-y: visible;
   }
 
   .gallery-cards-list {
@@ -1015,242 +887,495 @@ import Scene from '../components/Scene.svelte';
     width: 100%;
   }
 
-  .my-work-title {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 1.3rem;
-    font-weight: 300;
-    letter-spacing: 0.05em;
-    color: #111;
-    margin: 2.5rem 0 0.35rem 0.75rem;
-    width: 100%;
-  }
-
-  .gallery-glass-box {
-    background: rgba(255, 255, 255, 0.35);
-    backdrop-filter: blur(32px) saturate(200%);
-    -webkit-backdrop-filter: blur(32px) saturate(200%);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 1rem;
-    box-shadow: 22px 8px 28px rgba(0, 0, 0, 0.12), 11px 3px 10px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.6), inset 0 0 0 1px rgba(255, 255, 255, 0.4);
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    isolation: isolate;
-    max-width: 480px;
-    width: 100%;
-    overflow: hidden;
-    padding: 0;
-    transition: transform 0.25s ease;
-  }
-
-  .gallery-glass-box:hover {
-    transform: scale(1.03) translateZ(0);
-  }
-
-  .gallery-container {
+  .projects-section {
     position: relative;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: stretch;
-    gap: 0;
+    width: 100%;
     max-width: 100%;
-    flex-wrap: nowrap;
+    padding: 1rem 0 2rem 0;
+    isolation: isolate;
+    overflow: hidden;
   }
 
-  .gallery-text-block {
+  .projects-atmosphere {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .projects-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.7;
+  }
+
+  .projects-blob-1 {
+    width: 420px;
+    height: 420px;
+    top: 8%;
+    left: 5%;
+    background: radial-gradient(circle, rgba(186, 210, 255, 0.85) 0%, rgba(186, 210, 255, 0) 70%);
+  }
+
+  .projects-blob-2 {
+    width: 380px;
+    height: 380px;
+    top: 35%;
+    right: 0%;
+    background: radial-gradient(circle, rgba(230, 200, 255, 0.75) 0%, rgba(230, 200, 255, 0) 70%);
+  }
+
+  .projects-blob-3 {
+    width: 340px;
+    height: 340px;
+    bottom: 5%;
+    left: 35%;
+    background: radial-gradient(circle, rgba(190, 240, 230, 0.7) 0%, rgba(190, 240, 230, 0) 70%);
+  }
+
+  .projects-title {
+    position: relative;
+    z-index: 1;
+    display: block;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #111;
+    margin: 0.5rem auto 1rem auto;
+    width: 100%;
+    max-width: 1000px;
+    text-align: left;
+  }
+
+  .projects-intro {
+    position: relative;
+    z-index: 1;
+    display: block;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+    color: #444;
+    margin: 0 auto 2.5rem auto;
+    max-width: 1000px;
+    width: 100%;
+    text-align: left;
+  }
+
+  .projects-list {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto 2rem auto;
+  }
+
+  .project-card {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
-    flex: 1 1 auto;
-    min-width: 0;
-    padding: 0.85rem 1.25rem 0.85rem 1rem;
-    justify-content: center;
+    width: 100%;
+    max-width: none;
+    border-radius: 1.75rem;
+    overflow: hidden;
+    text-decoration: none;
+    background: linear-gradient(
+      155deg,
+      rgba(255, 255, 255, 0.28) 0%,
+      rgba(255, 255, 255, 0.1) 45%,
+      rgba(255, 255, 255, 0.16) 100%
+    );
+    backdrop-filter: blur(40px) saturate(200%);
+    -webkit-backdrop-filter: blur(40px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    box-shadow:
+      0 10px 36px rgba(0, 0, 0, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.75),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.2),
+      inset 1px 0 20px rgba(180, 210, 255, 0.12),
+      inset -1px 0 20px rgba(230, 190, 255, 0.1);
+    transform: translateY(0);
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
   }
 
-  .gallery-container > .button-container,
-  .gallery-text-block > .button-container {
-    margin-top: -0.5rem;
+  .project-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(
+      125deg,
+      rgba(255, 255, 255, 0.35) 0%,
+      transparent 35%,
+      transparent 65%,
+      rgba(200, 220, 255, 0.12) 100%
+    );
+    z-index: 0;
   }
 
-  .gallery-image-frame {
-    flex: 0 0 auto;
-    padding: 0.5rem 0 0.5rem 0.5rem;
+  .project-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.7);
+    box-shadow:
+      0 18px 44px rgba(0, 0, 0, 0.09),
+      inset 0 1px 0 rgba(255, 255, 255, 0.85),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.25),
+      inset 1px 0 24px rgba(180, 210, 255, 0.16),
+      inset -1px 0 24px rgba(230, 190, 255, 0.14);
+  }
+
+  .project-card-image,
+  .project-card-caption {
+    position: relative;
+    z-index: 1;
+  }
+
+  .project-card-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    min-height: 280px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: transparent;
+    padding: 1.5rem;
     box-sizing: border-box;
+    overflow: hidden;
   }
 
-  .gallery-side-image {
-    width: 100%;
-    max-width: 140px;
+  .project-card-image img {
+    max-width: 85%;
+    max-height: 85%;
+    width: auto;
     height: auto;
-    min-height: 100px;
-    max-height: 100px;
-    object-fit: cover;
-    border-radius: 0.5rem;
+    object-fit: contain;
     display: block;
   }
 
-  /* About me box (first card): allow taller image so this box is taller than the ones under My Work */
-  .gallery-cards-list > .gallery-glass-box:first-child .gallery-side-image {
-    min-height: 140px;
-    max-height: none;
-  }
-
-  /* First box under My Work: raise and slightly shrink the image within the box */
-  .gallery-cards-list > .gallery-glass-box:nth-child(3) .gallery-side-image {
-    transform: translateY(-6px) scale(0.82);
-  }
-
-  /* Second box under My Work: shrink the image within the box, show full logo (no crop) */
-  .gallery-cards-list > .gallery-glass-box:nth-child(4) .gallery-side-image {
-    transform: scale(0.68);
-    object-fit: contain;
-  }
-
-  .gallery-image-placeholder {
-    width: 100%;
-    max-width: 140px;
-    min-height: 100px;
-    background: rgba(0, 0, 0, 0.06);
-    border-radius: 0.5rem;
-    flex-shrink: 0;
-  }
-
-  .gallery-photos {
+  .project-card-caption {
     display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    justify-content: flex-start;
-    gap: 0.5rem;
-    width: 100%;
-    max-width: 100%;
-    flex-wrap: nowrap;
-  }
-
-  .gallery-text.gallery-title {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 300;
-    letter-spacing: 0.05em;
-    line-height: 1.45;
-    color: #111;
-    margin: 0;
-    text-align: left;
-    width: 100%;
-    max-width: 36em;
-    word-break: normal;
-    overflow-wrap: break-word;
-    white-space: normal;
-    box-sizing: border-box;
-  }
-
-  .gallery-text {
-    font-family: 'Inter', sans-serif;
-    font-size: 2.5rem;
-    font-weight: 300;
-    letter-spacing: 0.05em;
-    line-height: 1.4;
-    color: #111;
-    margin: 0;
-    word-break: keep-all;
-    overflow-wrap: break-word;
-    white-space: normal;
-  }
-
-  .gallery-text .word {
-    display: inline-block;
-    white-space: nowrap;
-  }
-
-  .gallery-text .letter {
-    display: inline;
-    opacity: 0;
-    transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  .gallery-text .letter.fade-in {
-    opacity: 1;
-  }
-
-  .gallery-text .letter.space {
-    width: 0.25em;
-  }
-
-  .gallery-photo {
-    flex: 1;
-    width: 0;
-    min-width: 0;
-    height: 38vh;
-    object-fit: cover;
-    border-radius: 0;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  }
-
-  .photo-1 {
-    position: relative;
-    object-fit: cover;
-    object-position: 50% center;
-  }
-
-  .photo-2 {
-    position: relative;
-  }
-
-  .photo-3 {
-    position: relative;
-    object-fit: cover;
-    object-position: 50% center;
-  }
-
-
-  .button-container {
-    display: flex;
-    gap: 1.5rem;
-    justify-content: flex-start;
-  }
-
-  .about-me-button {
-    display: inline-block;
-    position: relative;
-    padding: 0.35rem 0;
-    font-size: 0.9rem;
-    font-weight: 500;
-    line-height: 1.2;
-    color: #444;
-    text-decoration: none;
-    text-transform: lowercase;
-    letter-spacing: 0.08em;
-    transition: color 0.25s ease;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0 1.5rem 1.5rem 1.5rem;
     background: transparent;
   }
 
-  .about-me-button::after {
+  .project-card-title {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: #1d1d1f;
+    margin: 0;
+  }
+
+  .project-card-description {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 0.95rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: #6e6e73;
+    margin: 0;
+  }
+
+  .project-card-tag {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: #86868b;
+    margin-top: 0.25rem;
+  }
+
+  @media (max-width: 768px) {
+    .projects-list {
+      grid-template-columns: 1fr;
+    }
+
+    .project-card {
+      max-width: 100%;
+    }
+
+    .project-card-image {
+      padding: 1.75rem;
+    }
+
+    .project-card-caption {
+      padding: 0 1.25rem 1.25rem 1.25rem;
+    }
+
+    .project-card-title {
+      font-size: 1.25rem;
+    }
+  }
+
+
+  .about-glass-panel {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1000px;
+    margin: 2.5rem auto 2rem auto;
+    padding: 1.5rem 1.75rem 2rem 1.75rem;
+    box-sizing: border-box;
+    border-radius: 1.75rem;
+    overflow: visible;
+    backdrop-filter: blur(40px) saturate(200%);
+    -webkit-backdrop-filter: blur(40px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    box-shadow:
+      0 10px 36px rgba(0, 0, 0, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.75),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.2),
+      inset 1px 0 20px rgba(180, 210, 255, 0.12),
+      inset -1px 0 20px rgba(230, 190, 255, 0.1);
+  }
+
+  .about-glass-image {
+    width: 100%;
+    border-radius: 1.1rem;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-glass-image img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    object-position: center 70%;
+    display: block;
+  }
+
+  .about-glass-title {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #1d1d1f;
+    margin: 0 0 0.75rem 0;
+    text-transform: lowercase;
+    letter-spacing: -0.01em;
+  }
+
+  .about-glass-subtitle {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 1.15rem;
+    font-weight: 300;
+    color: #1d1d1f;
+    margin: 0 0 1.75rem 0;
+    max-width: 46em;
+    line-height: 1.6;
+    isolation: isolate;
+  }
+
+  .about-young-photo {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto 2rem auto;
+  }
+
+  .about-young-photo-frame {
+    position: relative;
+    min-width: 0;
+    border-radius: 1.1rem;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.25);
+  }
+
+  .about-young-photo-shoe {
+    flex: 1.05 1 0;
+    overflow: visible;
+  }
+
+  .about-young-photo-band {
+    flex: 1 1 0;
+    overflow: visible;
+  }
+
+  .about-young-photo-frame img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    object-position: center 80%;
+    border-radius: 1.1rem;
+  }
+
+  .about-young-photo-band img {
+    object-position: center center;
+  }
+
+  .about-young-callout {
+    position: absolute;
+    top: -0.35rem;
+    right: -0.55rem;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .about-young-callout-band {
+    top: auto;
+    bottom: -0.35rem;
+    right: auto;
+    left: -0.45rem;
+  }
+
+  .about-young-label {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    background: rgba(186, 210, 255, 0.95);
+    padding: 0.18rem 0.4rem;
+    border-radius: 0.35rem;
+    transform: rotate(-4deg);
+    white-space: nowrap;
+    color: #1d1d1f;
+    display: inline-block;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .about-young-label-band {
+    background: rgba(255, 170, 100, 0.95);
+    transform: rotate(3deg);
+  }
+
+  .about-highlight {
+    position: relative;
+    z-index: 0;
+    display: inline-block;
+    padding: 0.05em 0.1em;
+  }
+
+  .about-highlight::after {
     content: '';
     position: absolute;
+    top: 0;
     left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 1px;
-    background: currentColor;
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.25s ease;
+    height: 100%;
+    width: 0;
+    background-color: rgba(255, 220, 80, 0.45);
+    z-index: -1;
+    border-radius: 0.15em;
   }
 
-  .about-me-button:hover {
-    color: #111;
+  .about-highlight.is-highlighted::after {
+    animation: aboutHighlight 1.2s ease-in-out forwards;
   }
 
-  .about-me-button:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
+  @keyframes aboutHighlight {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+
+  .about-glass-content {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 2.5rem;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #1d1d1f;
+    line-height: 1.7;
+  }
+
+  .about-glass-left p {
+    margin: 0 0 1.25rem 0;
+    font-size: 0.98rem;
+    font-weight: 300;
+    color: #333;
+  }
+
+  .about-glass-left p:last-child {
+    margin-bottom: 0;
+  }
+
+  .about-fun-facts-title {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #1d1d1f;
+    margin: 0 0 0.75rem 0;
+    text-transform: lowercase;
+  }
+
+  .about-fun-facts-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .about-fun-facts-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    margin-top: -0.5rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    font-size: 0.85rem;
+    line-height: 1.45;
+    color: #444;
+    transition: background-color 0.4s ease;
+  }
+
+  .about-fun-facts-list li:hover {
+    background-color: rgba(0, 0, 0, 0.06);
+  }
+
+  .about-fun-fact-icon {
+    flex-shrink: 0;
+  }
+
+  .about-fun-fact-text {
+    flex: 1;
+  }
+
+  @media (max-width: 768px) {
+    .about-glass-panel {
+      padding: 1.15rem 1.15rem 1.5rem 1.15rem;
+      border-radius: 1.25rem;
+    }
+
+    .about-glass-image img {
+      height: 220px;
+    }
+
+    .about-young-photo {
+      max-width: 100%;
+    }
+
+    .about-young-label {
+      font-size: 0.85rem;
+    }
+
+    .about-glass-content {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .about-glass-subtitle {
+      font-size: 1rem;
+    }
   }
 
   /* Responsive */
   @media (max-width: 768px) {
     .name {
-      font-size: 5rem;
+      font-size: 2.25rem;
       letter-spacing: 0.1em;
     }
 

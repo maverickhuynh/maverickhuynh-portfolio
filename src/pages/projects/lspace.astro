@@ -1,0 +1,379 @@
+---
+// L'SPACE project detail
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>L'SPACE — Maverick Huynh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <nav class="nav">
+      <span class="nav-text">
+        Sophomore at USC based in Los Angeles /
+        <a href="/" class="nav-link">home</a> /
+        <a href="/#about" class="nav-link">about</a>
+      </span>
+    </nav>
+
+    <main class="project-page">
+      <a href="/#projects" class="back-link">← Projects</a>
+
+      <header class="project-header">
+        <div class="project-header-top">
+          <h1 class="project-title">L'SPACE</h1>
+          <span class="project-date">2025 - 2026</span>
+        </div>
+        <div class="project-intro">
+          <p>
+            Through NASA's L'SPACE Academy NPWEE Program, I'm the programmatics and logistics lead for O.R.I.O.N., a proposed lunar base monitoring network. Our team is designing a system that would help future crews track environmental and operational conditions around a lunar habitat, the kind of infrastructure that has to work before people ever set foot on the surface.
+          </p>
+          <p>
+            L'SPACE is built like a real aerospace mission: milestones, reviews, documentation, and a lot of coordination across roles. My job sits at the intersection of schedule, communication, and delivery, making sure the team stays aligned, deadlines are realistic, and nothing critical falls through the cracks as we move from concept toward a formal proposal.
+          </p>
+        </div>
+      </header>
+
+      <section class="project-meta glass-panel">
+        <div class="meta-row">
+          <span class="meta-label">Role</span>
+          <span class="meta-value">Programmatics &amp; Logistics Lead</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">Project</span>
+          <span class="meta-value">O.R.I.O.N. Lunar Base Monitoring Network</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">Type</span>
+          <span class="meta-value">NASA L'SPACE NPWEE Program</span>
+        </div>
+      </section>
+
+      <section class="project-section glass-panel">
+        <div class="section-logo">
+          <img src="/images/lspace_logo_blk-02.png" alt="L'SPACE" />
+        </div>
+        <h2 class="section-title">What I'm working on</h2>
+        <p>
+          I own the project's programmatic backbone: timelines, task tracking, meeting cadence, and the logistics that keep a distributed student team moving. That includes coordinating deliverables for design reviews, keeping documentation consistent, and helping translate technical work into clear progress updates.
+        </p>
+        <p>
+          On the systems side, I've gotten hands-on with how lunar monitoring concepts get scoped: what sensors matter, what assumptions we make about the environment, and how a proposed network has to survive both engineering constraints and mission operations realities.
+        </p>
+      </section>
+
+      <section class="project-section glass-panel">
+        <h2 class="section-title">Why it matters</h2>
+        <p>
+          Space systems fail when the planning fails first. O.R.I.O.N. has pushed me to treat coordination as an engineering problem, not just admin work, since a lunar monitoring network is only as strong as the process that designs it.
+        </p>
+        <p>
+          It's also my closest look yet at how NASA-aligned student teams operate: structured, deadline-driven, and serious about turning ideas into something that could actually fly.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
+
+<style is:global>
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+    min-height: 100vh;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #1d1d1f;
+    background-color: #f5f5f7;
+    box-sizing: border-box;
+  }
+
+  body {
+    opacity: 0;
+    animation: pageFadeIn 0.3s ease forwards;
+  }
+
+  @keyframes pageFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    body {
+      opacity: 1;
+      animation: none;
+    }
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  .nav {
+    position: fixed;
+    top: 1rem;
+    left: 2rem;
+    right: 2.5rem;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 1rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  }
+
+  .nav-text {
+    font-size: 0.9rem;
+    color: #111;
+    letter-spacing: 0.1em;
+    line-height: 1.2;
+  }
+
+  .nav-link {
+    color: #111;
+    text-decoration: none;
+  }
+
+  .nav-link:hover {
+    text-decoration: underline;
+  }
+
+  .project-page {
+    position: relative;
+    width: 100%;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 7.5rem 2rem 4rem 2rem;
+  }
+
+  .project-page::before,
+  .project-page::after {
+    display: none;
+  }
+
+  .back-link,
+  .project-header,
+  .project-meta,
+  .project-section,
+  .project-photo {
+    position: relative;
+    z-index: 1;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #6e6e73;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: #1d1d1f;
+  }
+
+  .project-header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-title {
+    margin: 0;
+    font-size: clamp(2.2rem, 5vw, 3.25rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    color: #1d1d1f;
+    line-height: 1.1;
+  }
+
+  .project-date {
+    flex-shrink: 0;
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: #6e6e73;
+    letter-spacing: -0.01em;
+  }
+
+  .project-intro p {
+    margin: 0 0 1rem 0;
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: #3a3a3c;
+    max-width: 46em;
+  }
+
+  .project-intro p:last-child {
+    margin-bottom: 0;
+  }
+
+  .project-intro strong {
+    font-weight: 600;
+    color: #1d1d1f;
+  }
+
+  .glass-panel {
+    margin-top: 1.75rem;
+    padding: 1.5rem 1.6rem;
+    border-radius: 1.5rem;
+    background: linear-gradient(
+      155deg,
+      rgba(255, 255, 255, 0.28) 0%,
+      rgba(255, 255, 255, 0.1) 45%,
+      rgba(255, 255, 255, 0.16) 100%
+    );
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    box-shadow:
+      0 10px 36px rgba(0, 0, 0, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.75),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .project-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .project-photo {
+    margin: 1.75rem 0 0 0;
+    padding: 0.85rem;
+    overflow: hidden;
+  }
+
+  .project-photo img {
+    width: 100%;
+    height: auto;
+    max-height: 420px;
+    object-fit: cover;
+    object-position: center 30%;
+    border-radius: 1.1rem;
+    display: block;
+  }
+
+  .project-photo-caption {
+    margin: 0.85rem 0.35rem 0.35rem 0.35rem;
+    font-size: 0.95rem;
+    font-weight: 300;
+    letter-spacing: -0.01em;
+    color: #1d1d1f;
+  }
+
+  .meta-row {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    gap: 1rem;
+    align-items: baseline;
+  }
+
+  .meta-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #86868b;
+  }
+
+  .meta-value {
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: #1d1d1f;
+    letter-spacing: -0.01em;
+  }
+
+  .section-logo {
+    width: 72px;
+    height: 72px;
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .section-logo img {
+    width: 100%;
+    height: 100%;
+    max-width: 72px;
+    max-height: 72px;
+    object-fit: contain;
+    display: block;
+  }
+
+  .section-title {
+    margin: 0 0 0.85rem 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: #1d1d1f;
+  }
+
+  .project-section p {
+    margin: 0 0 1rem 0;
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: #3a3a3c;
+  }
+
+  .project-section p:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 768px) {
+    .nav {
+      left: 1rem;
+      right: 1rem;
+      padding: 0.85rem 1rem;
+    }
+
+    .nav-text {
+      font-size: 0.72rem;
+    }
+
+    .project-page {
+      padding: 6.5rem 1.25rem 3rem 1.25rem;
+    }
+
+    .project-header-top {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .meta-row {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+
+    .glass-panel {
+      padding: 1.25rem 1.15rem;
+      border-radius: 1.25rem;
+    }
+  }
+</style>

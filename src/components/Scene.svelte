@@ -489,7 +489,7 @@
 
         // Calculate distance from mouse - only affect when very close to this specific sphere
         const distanceToMouse = mesh.position.distanceTo(worldMouse);
-        const hitRadius = radius * 2.6; // Larger interaction area for more dispersed feel
+        const hitRadius = radius * 3.3; // Larger interaction area for more dispersed feel
         
         // Only apply impulse if mouse is very close to THIS sphere
         if (distanceToMouse < hitRadius && distanceToMouse > 0) {
@@ -500,19 +500,19 @@
           
           // Strong impulse - more dispersed when hovered
           const hitStrength = (1 - distanceToMouse / hitRadius); // Stronger when closer
-          const impulseForce = hitStrength * 0.9; // Stronger push for more spread
+          const impulseForce = hitStrength * 1.5; // Stronger push for more spread
           
           // Apply impulse to velocity (like knocking it)
           velocity.add(hitDirection.multiplyScalar(impulseForce));
         }
 
         // Less damping - drift longer before settling
-        velocity.multiplyScalar(0.995); // Less friction, takes longer to settle
+        velocity.multiplyScalar(0.997); // Less friction, takes longer to settle
         
         // Very weak return force - takes longer to drift back to middle
         const returnForce = new THREE.Vector3()
           .subVectors(originalPosition, mesh.position)
-          .multiplyScalar(0.002); // Weaker gravity, slower return to center
+          .multiplyScalar(0.001); // Weaker gravity, slower return to center
         velocity.add(returnForce);
         
         // Smooth out velocity changes to prevent jagged movement
