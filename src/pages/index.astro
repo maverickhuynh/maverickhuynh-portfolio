@@ -199,14 +199,24 @@ import Scene from '../components/Scene.svelte';
               <span class="project-card-tag">Healthcare &middot; Hackathon</span>
             </div>
           </a>
-          <a href="#" class="project-card">
-            <div class="project-card-image">
-              <img src="/images/BRAND%20CAMP%202024-96%20(1)-Picsart-BackgroundRemover.jpg" alt="Project" />
+          <a href="/projects/blueprint" class="project-card" data-astro-prefetch>
+            <div class="project-card-image project-card-image--compact">
+              <img src="/images/blueprint.png" alt="Blueprint" />
             </div>
             <div class="project-card-caption">
-              <h3 class="project-card-title">Project title</h3>
-              <p class="project-card-description">Add a one-line description of this project.</p>
-              <span class="project-card-tag">Category &middot; Type</span>
+              <h3 class="project-card-title">Blueprint</h3>
+              <p class="project-card-description">AI-powered college admissions platform built through USC's ACAD 406 incubator, giving students personalized, data-backed application guidance.</p>
+              <span class="project-card-tag">Startup Incubator &middot; Team Project</span>
+            </div>
+          </a>
+          <a href="/projects/bluescope" class="project-card" data-astro-prefetch>
+            <div class="project-card-image">
+              <img src="/images/ThetaTau.png" alt="BlueScope" />
+            </div>
+            <div class="project-card-caption">
+              <h3 class="project-card-title">BlueScope</h3>
+              <p class="project-card-description">Drinking-water insights platform that turns buried public water-quality data into something everyday people can search, understand, and act on.</p>
+              <span class="project-card-tag">Pitch Competition &middot; Personal Venture</span>
             </div>
           </a>
           </div>
@@ -244,8 +254,9 @@ import Scene from '../components/Scene.svelte';
 
             <div class="about-glass-content">
               <div class="about-glass-left">
-                <p>Growing up, it wasn't "pick one," it was pick all of them: piano, guitar, saxophone, basketball, lacrosse, and get good at every single one. My parents weren't full tiger-parent, but they pushed my standards up early and never let me settle.</p>
-                <p>Looking back, I couldn't be more grateful for it. Without that first push, I wouldn't be anywhere close to where I am now. They set the blueprint, and now it's on me to keep building on it myself. I'm a sophomore at USC in Los Angeles, still running on that same fire.</p>
+                <p>Growing up, it wasn't "pick one," it was pick all of them: piano, guitar, saxophone, basketball, lacrosse, and get good at every single one. My parents weren't full tiger-parent, but they pushed my standards up early and never let me settle. Basketball ended up sticking with me my whole life, and saxophone stuck too, I played through elementary all the way to high school in jazz and wind ensemble.</p>
+                <p>Looking back, I couldn't be more grateful for it. Without that first push, I wouldn't be anywhere close to where I am now. They set the blueprint, and now it's on me to keep building on it myself.</p>
+                <p>Outside of school, I'm always looking for the next thing to explore. I traveled through four countries in Europe last summer, Croatia was my favorite by far, and at home I'm the person popping into random shops just to see how they've thought about the space and the interior design. I'll consume pretty much any kind of media I can get my hands on. I'm a sophomore at USC in Los Angeles, super excited about the future.</p>
               </div>
               <div class="about-glass-right">
                 <h3 class="about-fun-facts-title">Fun facts about me:</h3>
@@ -256,6 +267,68 @@ import Scene from '../components/Scene.svelte';
                   <li><span class="about-fun-fact-icon">✈️</span><span class="about-fun-fact-text">I wasn't named after Top Gun</span></li>
                 </ul>
               </div>
+            </div>
+          </section>
+
+          <section id="contact" class="contact-panel">
+            <div class="contact-atmosphere" aria-hidden="true">
+              <span class="contact-blob contact-blob-1"></span>
+              <span class="contact-blob contact-blob-2"></span>
+            </div>
+            <div class="contact-header">
+              <h2 class="contact-title">hit me up</h2>
+              <p class="contact-intro">Want to talk? Reach me here.</p>
+            </div>
+            <div class="contact-links">
+              <a
+                class="contact-item"
+                href="https://www.instagram.com/mavvdeo"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span class="contact-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2.5" y="2.5" width="19" height="19" rx="5.5" />
+                    <circle cx="12" cy="12" r="4.25" />
+                    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                  </svg>
+                </span>
+                <span class="contact-item-text">
+                  <span class="contact-label">Instagram</span>
+                  <span class="contact-value">mavvdeo</span>
+                </span>
+                <span class="contact-arrow" aria-hidden="true">→</span>
+              </a>
+              <a
+                class="contact-item"
+                href="https://www.linkedin.com/in/maverick-huynh-ba89a8380/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span class="contact-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                  </svg>
+                </span>
+                <span class="contact-item-text">
+                  <span class="contact-label">LinkedIn</span>
+                  <span class="contact-value">Maverick Huynh</span>
+                </span>
+                <span class="contact-arrow" aria-hidden="true">→</span>
+              </a>
+              <a class="contact-item" href="mailto:mdhuynh@usc.edu">
+                <span class="contact-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2.5" y="4.5" width="19" height="15" rx="2.5" />
+                    <path d="M3.5 7.5 12 13l8.5-5.5" />
+                  </svg>
+                </span>
+                <span class="contact-item-text">
+                  <span class="contact-label">Email</span>
+                  <span class="contact-value">mdhuynh@usc.edu</span>
+                </span>
+                <span class="contact-arrow" aria-hidden="true">→</span>
+              </a>
             </div>
           </section>
         </div>
@@ -1063,6 +1136,11 @@ import Scene from '../components/Scene.svelte';
     display: block;
   }
 
+  .project-card-image--compact img {
+    max-width: 48%;
+    max-height: 48%;
+  }
+
   .project-card-caption {
     display: flex;
     flex-direction: column;
@@ -1344,6 +1422,206 @@ import Scene from '../components/Scene.svelte';
     flex: 1;
   }
 
+  .contact-panel {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto 2.5rem auto;
+    padding: 1.75rem 1.85rem 1.85rem 1.85rem;
+    box-sizing: border-box;
+    border-radius: 1.75rem;
+    overflow: hidden;
+    background: linear-gradient(
+      155deg,
+      rgba(255, 255, 255, 0.28) 0%,
+      rgba(255, 255, 255, 0.1) 45%,
+      rgba(255, 255, 255, 0.16) 100%
+    );
+    backdrop-filter: blur(40px) saturate(200%);
+    -webkit-backdrop-filter: blur(40px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    box-shadow:
+      0 10px 36px rgba(0, 0, 0, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.75),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.2),
+      inset 1px 0 20px rgba(180, 210, 255, 0.12),
+      inset -1px 0 20px rgba(230, 190, 255, 0.1);
+  }
+
+  .contact-atmosphere {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+    border-radius: inherit;
+  }
+
+  .contact-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(55px);
+    opacity: 0.7;
+  }
+
+  .contact-blob-1 {
+    width: 240px;
+    height: 240px;
+    top: -20%;
+    left: -6%;
+    background: radial-gradient(circle, rgba(170, 210, 255, 0.8) 0%, rgba(170, 210, 255, 0) 70%);
+  }
+
+  .contact-blob-2 {
+    width: 220px;
+    height: 220px;
+    bottom: -25%;
+    right: -4%;
+    background: radial-gradient(circle, rgba(200, 230, 220, 0.7) 0%, rgba(200, 230, 220, 0) 70%);
+  }
+
+  .contact-header,
+  .contact-links {
+    position: relative;
+    z-index: 1;
+  }
+
+  .contact-header {
+    margin-bottom: 1.35rem;
+  }
+
+  .contact-title {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #1d1d1f;
+    margin: 0 0 0.35rem 0;
+    text-transform: lowercase;
+    letter-spacing: -0.01em;
+  }
+
+  .contact-intro {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    color: #3a3a3c;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .contact-links {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.85rem;
+  }
+
+  .contact-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 1rem 1.05rem;
+    border-radius: 1.15rem;
+    text-decoration: none;
+    color: #1d1d1f;
+    overflow: hidden;
+    background: linear-gradient(
+      155deg,
+      rgba(255, 255, 255, 0.42) 0%,
+      rgba(255, 255, 255, 0.16) 50%,
+      rgba(255, 255, 255, 0.24) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    box-shadow:
+      0 6px 20px rgba(0, 0, 0, 0.04),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+
+  .contact-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(
+      125deg,
+      rgba(255, 255, 255, 0.4) 0%,
+      transparent 40%,
+      transparent 70%,
+      rgba(180, 210, 255, 0.1) 100%
+    );
+  }
+
+  .contact-item:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.9);
+    box-shadow:
+      0 12px 28px rgba(0, 0, 0, 0.07),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  .contact-item:hover .contact-arrow {
+    transform: translateX(3px);
+    opacity: 1;
+  }
+
+  .contact-icon {
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+    width: 2.4rem;
+    height: 2.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.8rem;
+    color: #1d1d1f;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+  }
+
+  .contact-item-text {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .contact-label {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #86868b;
+  }
+
+  .contact-value {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: #1d1d1f;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .contact-arrow {
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+    font-size: 1rem;
+    color: #6e6e73;
+    opacity: 0.55;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
   @media (max-width: 768px) {
     .about-glass-panel {
       padding: 1.15rem 1.15rem 1.5rem 1.15rem;
@@ -1369,6 +1647,16 @@ import Scene from '../components/Scene.svelte';
 
     .about-glass-subtitle {
       font-size: 1rem;
+    }
+
+    .contact-panel {
+      padding: 1.2rem 1.15rem 1.25rem 1.15rem;
+      border-radius: 1.25rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .contact-links {
+      grid-template-columns: 1fr;
     }
   }
 

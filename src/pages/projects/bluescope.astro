@@ -1,0 +1,390 @@
+---
+// BlueScope project detail
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BlueScope - Maverick Huynh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <nav class="nav">
+      <span class="nav-text">
+        Sophomore at USC based in Los Angeles /
+        <a href="/" class="nav-link">home</a> /
+        BlueScope
+      </span>
+    </nav>
+
+    <main class="project-page">
+      <a href="/#projects" class="back-link">← Projects</a>
+
+      <header class="project-header">
+        <div class="project-header-top">
+          <h1 class="project-title">BlueScope</h1>
+          <span class="project-date">Theta Tau Pitch Competition</span>
+        </div>
+        <div class="project-intro">
+          <p>
+            BlueScope is a drinking-water insights platform I built for Theta Tau's pitch competition, designed to make public water-quality data actually usable for everyday people. Most water-quality information is technically public, but it's buried in government reports, technical jargon, and PDFs nobody wants to read. BlueScope pulls that data together and turns it into something a normal person can search, understand, and act on.
+          </p>
+        </div>
+      </header>
+
+      <section class="project-meta glass-panel">
+        <div class="meta-row">
+          <span class="meta-label">Role</span>
+          <span class="meta-value">Founder / Product Lead</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">Focus</span>
+          <span class="meta-value">Product Strategy, Data Engineering, Environmental Accessibility</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">Type</span>
+          <span class="meta-value">Pitch Competition · Personal Venture</span>
+        </div>
+      </section>
+
+      <section class="project-section glass-panel">
+        <div class="section-logo">
+          <img src="/images/ThetaTau.png" alt="Theta Tau" />
+        </div>
+        <h2 class="section-title">What I built</h2>
+        <p>
+          BlueScope lets someone search their location and get back a simplified breakdown of their local drinking water: what's been detected, how it compares to regulatory limits, and what that actually means in plain language. Instead of a dense government report, users get a layered experience: a quick summary up front, with the option to dig into the underlying data, sources, and contaminant explanations if they want more.
+        </p>
+        <p>
+          On the technical side, I explored live scraping of public water-quality data, then had to figure out how to clean and standardize it, since public datasets are inconsistent across cities and utilities. I worked through what information actually mattered to a nontechnical user, how to explain technical terms without oversimplifying them, and how to distinguish between something being legally compliant and something being genuinely safe.
+        </p>
+      </section>
+
+      <section class="project-section glass-panel demo-section">
+        <h2 class="section-title">Demo</h2>
+        <p>
+          A walkthrough of BlueScope: search a location, see the water-quality summary, and dig into the underlying data.
+        </p>
+        <div class="demo-video">
+          <video
+            controls
+            playsinline
+            preload="metadata"
+          >
+            <source src="/videos/bluescope-demo.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </section>
+
+      <section class="project-section glass-panel">
+        <h2 class="section-title">Why it matters</h2>
+        <p>
+          This project came directly from a trip to Vietnam that changed how I think about access. Clean water isn't a guarantee for everyone, and even where the data on water quality exists, most people have no real way to understand it. That gap between "public" and "usable" is what BlueScope was built to close.
+        </p>
+        <p>
+          Presenting this at Theta Tau's pitch competition pushed me to defend not just the technical build, but the actual product thinking behind it: what to show, what to leave out, and how to be honest about the limits of the data without either scaring people or oversimplifying something that affects their health.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
+
+<style is:global>
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+    min-height: 100vh;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #1d1d1f;
+    background-color: #f5f5f7;
+    box-sizing: border-box;
+  }
+
+  body {
+    opacity: 0;
+    animation: pageFadeIn 0.3s ease forwards;
+  }
+
+  @keyframes pageFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    body {
+      opacity: 1;
+      animation: none;
+    }
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  .nav {
+    position: fixed;
+    top: 1rem;
+    left: 2rem;
+    right: 2.5rem;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 1rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  }
+
+  .nav-text {
+    font-size: 0.9rem;
+    color: #111;
+    letter-spacing: 0.1em;
+    line-height: 1.2;
+  }
+
+  .nav-link {
+    color: #111;
+    text-decoration: none;
+  }
+
+  .nav-link:hover {
+    text-decoration: underline;
+  }
+
+  .project-page {
+    position: relative;
+    width: 100%;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 7.5rem 2rem 4rem 2rem;
+  }
+
+  .project-page::before,
+  .project-page::after {
+    display: none;
+  }
+
+  .back-link,
+  .project-header,
+  .project-meta,
+  .project-section {
+    position: relative;
+    z-index: 1;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #6e6e73;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: #1d1d1f;
+  }
+
+  .project-header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-title {
+    margin: 0;
+    font-size: clamp(2.2rem, 5vw, 3.25rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    color: #1d1d1f;
+    line-height: 1.1;
+  }
+
+  .project-date {
+    flex-shrink: 0;
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: #6e6e73;
+    letter-spacing: -0.01em;
+  }
+
+  .project-intro p {
+    margin: 0 0 1rem 0;
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: #3a3a3c;
+    max-width: 46em;
+  }
+
+  .project-intro p:last-child {
+    margin-bottom: 0;
+  }
+
+  .glass-panel {
+    margin-top: 1.75rem;
+    padding: 1.5rem 1.6rem;
+    border-radius: 1.5rem;
+    background: linear-gradient(
+      155deg,
+      rgba(255, 255, 255, 0.28) 0%,
+      rgba(255, 255, 255, 0.1) 45%,
+      rgba(255, 255, 255, 0.16) 100%
+    );
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    box-shadow:
+      0 10px 36px rgba(0, 0, 0, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.75),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .project-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .meta-row {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    gap: 1rem;
+    align-items: baseline;
+  }
+
+  .meta-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #86868b;
+  }
+
+  .meta-value {
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: #1d1d1f;
+    letter-spacing: -0.01em;
+  }
+
+  .section-logo {
+    width: 72px;
+    height: 72px;
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .section-logo img {
+    width: 100%;
+    height: 100%;
+    max-width: 72px;
+    max-height: 72px;
+    object-fit: contain;
+    display: block;
+  }
+
+  .section-title {
+    margin: 0 0 0.85rem 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: #1d1d1f;
+  }
+
+  .project-section p {
+    margin: 0 0 1rem 0;
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: #3a3a3c;
+  }
+
+  .project-section p:last-child {
+    margin-bottom: 0;
+  }
+
+  .demo-section p {
+    margin-bottom: 1.15rem;
+  }
+
+  .demo-video {
+    position: relative;
+    border-radius: 1.1rem;
+    overflow: hidden;
+    background: #0f0f10;
+    box-shadow:
+      0 10px 36px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .demo-video video {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 560px;
+    vertical-align: top;
+    background: #0f0f10;
+  }
+
+  @media (max-width: 768px) {
+    .nav {
+      left: 1rem;
+      right: 1rem;
+      padding: 0.85rem 1rem;
+    }
+
+    .nav-text {
+      font-size: 0.72rem;
+    }
+
+    .project-page {
+      padding: 6.5rem 1.25rem 3rem 1.25rem;
+    }
+
+    .project-header-top {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .meta-row {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+
+    .glass-panel {
+      padding: 1.25rem 1.15rem;
+      border-radius: 1.25rem;
+    }
+
+    .demo-video video {
+      max-height: none;
+    }
+  }
+</style>
