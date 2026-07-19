@@ -159,16 +159,6 @@ import Scene from '../components/Scene.svelte';
               <span class="project-card-tag">Internship</span>
             </div>
           </a>
-          <a href="/projects/lspace" class="project-card" data-astro-prefetch>
-            <div class="project-card-image">
-              <img src="/images/lspace_logo_blk-02.png" alt="L'SPACE" />
-            </div>
-            <div class="project-card-caption">
-              <h3 class="project-card-title">L'SPACE</h3>
-              <p class="project-card-description">Programmatics and logistics lead for O.R.I.O.N., a proposed lunar base monitoring network</p>
-              <span class="project-card-tag">NASA L'SPACE NPWEE Program</span>
-            </div>
-          </a>
           <a href="/projects/nosoleslost" class="project-card" data-astro-prefetch>
             <div class="project-card-image">
               <img src="/images/Screenshot%202025-12-07%20191900-Picsart-BackgroundRemover.png" alt="NoSolesLost" />
@@ -177,6 +167,16 @@ import Scene from '../components/Scene.svelte';
               <h3 class="project-card-title">NoSolesLost</h3>
               <p class="project-card-description">Custom hand-painted sneakers, started at 14 during COVID and grew into my first real business.</p>
               <span class="project-card-tag">Business &middot; Founder</span>
+            </div>
+          </a>
+          <a href="/projects/lspace" class="project-card" data-astro-prefetch>
+            <div class="project-card-image">
+              <img src="/images/lspace_logo_blk-02.png" alt="L'SPACE" />
+            </div>
+            <div class="project-card-caption">
+              <h3 class="project-card-title">L'SPACE</h3>
+              <p class="project-card-description">Programmatics and logistics lead for O.R.I.O.N., a proposed lunar base monitoring network</p>
+              <span class="project-card-tag">NASA L'SPACE NPWEE Program</span>
             </div>
           </a>
           <a href="/projects/cafe-dulce" class="project-card" data-astro-prefetch>
@@ -760,8 +760,8 @@ import Scene from '../components/Scene.svelte';
     background: transparent;
     overflow: hidden;
     z-index: 15;
-    margin: 4rem 2.5rem 2rem 2.5rem;
-    padding: 0 1rem;
+    margin: 4rem 0 2rem 0;
+    padding: 0;
     box-sizing: border-box;
   }
 
@@ -1660,15 +1660,52 @@ import Scene from '../components/Scene.svelte';
     }
   }
 
-  /* Responsive */
+  /* Responsive — mobile only; laptop layout unchanged */
   @media (max-width: 768px) {
+    html,
+    body {
+      padding: 0 0.75rem;
+    }
+
+    .nav {
+      left: 0.75rem;
+      right: 0.75rem;
+      padding: 0.85rem 1rem;
+    }
+
+    .nav-text {
+      font-size: 0.75rem;
+    }
+
     .name {
       font-size: 2.25rem;
       letter-spacing: 0.1em;
     }
 
-    .nav-text {
-      font-size: 0.75rem;
+    .photo-gallery {
+      padding: 0.75rem 0 2rem 0;
+    }
+
+    .models-section-header,
+    .models-tagline {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .projects-title,
+    .projects-intro,
+    .projects-list,
+    .about-glass-panel,
+    .contact-panel {
+      max-width: 100%;
+    }
+
+    .project-card-image {
+      padding: 1.5rem 1.15rem;
+    }
+
+    .project-card-caption {
+      padding: 0 1.15rem 1.25rem 1.15rem;
     }
   }
 </style>
