@@ -59,10 +59,10 @@
         </div>
         <h2 class="section-title">What I'm working on</h2>
         <p>
-          I own the project's programmatic backbone: timelines, task tracking, meeting cadence, and the logistics that keep a distributed student team moving. That includes coordinating deliverables for design reviews, keeping documentation consistent, and helping translate technical work into clear progress updates.
+          I own the project's programmatic backbone: the 12-month Gantt chart across all four development phases, the resource, labor, and basis of estimate sheet breaking down hours and costs per project element, and the risk register covering schedule, budget, and team coordination risk. That includes coordinating deliverables for our Month 2, 6, 9, and 12 design reviews, keeping documentation consistent, and building out milestone tracking so a distributed, 9-person cross-institutional team stays accountable to the schedule.
         </p>
         <p>
-          On the systems side, I've gotten hands-on with how lunar monitoring concepts get scoped: what sensors matter, what assumptions we make about the environment, and how a proposed network has to survive both engineering constraints and mission operations realities.
+          On the systems side, I've gotten hands-on with how a lunar monitoring network like O.R.I.O.N. gets scoped: which of the five operating domains, crew, habitat, power, rovers, and communications, actually need coverage, what assumptions we make about lunar-surface constraints like communication delay and Earth-link loss, and how our KPPs for incident detection and response time have to hold up against both engineering feasibility and real mission operations.
         </p>
       </section>
 
@@ -74,6 +74,24 @@
         <p>
           It's also my closest look yet at how NASA-aligned student teams operate: structured, deadline-driven, and serious about turning ideas into something that could actually fly.
         </p>
+      </section>
+
+      <section class="project-section glass-panel resources-panel">
+        <h2 class="section-title">Proposal</h2>
+        <p>
+          Full O.R.I.O.N. proposal document from our L'SPACE NPWEE work.
+        </p>
+        <div class="resource-links">
+          <a
+            class="resource-link"
+            href="/files/lspace/orion-proposal.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="resource-link-label">View full proposal</span>
+            <span class="resource-link-meta">PDF</span>
+          </a>
+        </div>
       </section>
     </main>
   </body>
@@ -343,6 +361,68 @@
 
   .project-section p:last-child {
     margin-bottom: 0;
+  }
+
+  .resources-panel .resource-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+  }
+
+  .resource-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.15rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    text-decoration: none;
+    color: #1d1d1f;
+    background: linear-gradient(
+      155deg,
+      rgba(255, 255, 255, 0.28) 0%,
+      rgba(255, 255, 255, 0.1) 45%,
+      rgba(255, 255, 255, 0.16) 100%
+    );
+    backdrop-filter: blur(40px) saturate(200%);
+    -webkit-backdrop-filter: blur(40px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    box-shadow:
+      0 10px 36px rgba(0, 0, 0, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.75),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.2),
+      inset 1px 0 20px rgba(180, 210, 255, 0.12),
+      inset -1px 0 20px rgba(230, 190, 255, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .resource-link:hover {
+    transform: translateY(-1px);
+    box-shadow:
+      0 14px 32px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.85),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.25),
+      inset 1px 0 20px rgba(180, 210, 255, 0.14),
+      inset -1px 0 20px rgba(230, 190, 255, 0.12);
+  }
+
+  .resource-link-label {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .resource-link-meta {
+    flex-shrink: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: #6e6e73;
   }
 
   @media (max-width: 768px) {
