@@ -156,7 +156,10 @@ import Scene from '../components/Scene.svelte';
             <div class="project-card-caption">
               <h3 class="project-card-title">Bank of America</h3>
               <p class="project-card-description">2026 Bank of America Student Leader Intern</p>
-              <span class="project-card-tag">Internship</span>
+              <div class="project-card-meta">
+                <span class="project-card-tag">Internship</span>
+                <span class="project-card-cta">View <span aria-hidden="true">→</span></span>
+              </div>
             </div>
           </a>
           <a href="/projects/nosoleslost" class="project-card" data-astro-prefetch>
@@ -166,7 +169,10 @@ import Scene from '../components/Scene.svelte';
             <div class="project-card-caption">
               <h3 class="project-card-title">NoSolesLost</h3>
               <p class="project-card-description">Custom hand-painted sneakers, started at 12 during COVID and grew into my first real business.</p>
-              <span class="project-card-tag">Business &middot; Founder</span>
+              <div class="project-card-meta">
+                <span class="project-card-tag">Business &middot; Founder</span>
+                <span class="project-card-cta">View <span aria-hidden="true">→</span></span>
+              </div>
             </div>
           </a>
           <a href="/projects/lspace" class="project-card" data-astro-prefetch>
@@ -176,7 +182,10 @@ import Scene from '../components/Scene.svelte';
             <div class="project-card-caption">
               <h3 class="project-card-title">L'SPACE</h3>
               <p class="project-card-description">Programmatics and logistics lead for O.R.I.O.N., a proposed lunar base monitoring network</p>
-              <span class="project-card-tag">NASA L'SPACE NPWEE Program</span>
+              <div class="project-card-meta">
+                <span class="project-card-tag">NASA L'SPACE NPWEE Program</span>
+                <span class="project-card-cta">View <span aria-hidden="true">→</span></span>
+              </div>
             </div>
           </a>
           <a href="/projects/cafe-dulce" class="project-card" data-astro-prefetch>
@@ -186,7 +195,10 @@ import Scene from '../components/Scene.svelte';
             <div class="project-card-caption">
               <h3 class="project-card-title">Café Dulce: Systems Redesign</h3>
               <p class="project-card-description">Systems engineering analysis of Café Dulce's ordering flow, redesigning the layout and building a mobile order MVP to cut congestion and wait times.</p>
-              <span class="project-card-tag">Systems Engineering &middot; Team Project</span>
+              <div class="project-card-meta">
+                <span class="project-card-tag">Systems Engineering &middot; Team Project</span>
+                <span class="project-card-cta">View <span aria-hidden="true">→</span></span>
+              </div>
             </div>
           </a>
           <a href="/projects/amiya-health" class="project-card" data-astro-prefetch>
@@ -196,7 +208,10 @@ import Scene from '../components/Scene.svelte';
             <div class="project-card-caption">
               <h3 class="project-card-title">Amiya Health</h3>
               <p class="project-card-description">AI-powered virtual checkup platform making telehealth accessible for seniors, built at my first hackathon with a16z.</p>
-              <span class="project-card-tag">Healthcare &middot; Hackathon</span>
+              <div class="project-card-meta">
+                <span class="project-card-tag">Healthcare &middot; Hackathon</span>
+                <span class="project-card-cta">View <span aria-hidden="true">→</span></span>
+              </div>
             </div>
           </a>
           <a href="/projects/blueprint" class="project-card" data-astro-prefetch>
@@ -206,7 +221,10 @@ import Scene from '../components/Scene.svelte';
             <div class="project-card-caption">
               <h3 class="project-card-title">Blueprint</h3>
               <p class="project-card-description">AI-powered college admissions platform built through USC's ACAD 406 incubator, giving students personalized, data-backed application guidance.</p>
-              <span class="project-card-tag">Startup Incubator &middot; Team Project</span>
+              <div class="project-card-meta">
+                <span class="project-card-tag">Startup Incubator &middot; Team Project</span>
+                <span class="project-card-cta">View <span aria-hidden="true">→</span></span>
+              </div>
             </div>
           </a>
           <a href="/projects/bluescope" class="project-card" data-astro-prefetch>
@@ -216,7 +234,10 @@ import Scene from '../components/Scene.svelte';
             <div class="project-card-caption">
               <h3 class="project-card-title">BlueScope</h3>
               <p class="project-card-description">Drinking-water insights platform that turns buried public water-quality data into something everyday people can search, understand, and act on.</p>
-              <span class="project-card-tag">Pitch Competition &middot; Personal Venture</span>
+              <div class="project-card-meta">
+                <span class="project-card-tag">Pitch Competition &middot; Personal Venture</span>
+                <span class="project-card-cta">View <span aria-hidden="true">→</span></span>
+              </div>
             </div>
           </a>
           </div>
@@ -713,20 +734,13 @@ import Scene from '../components/Scene.svelte';
   .name-line {
     display: inline-block;
     opacity: 0;
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-  }
-
-  .name-left {
-    transform: translateX(-100px);
-  }
-
-  .name-right {
-    transform: translateX(100px);
+    transform: translateY(16px);
+    transition: opacity 0.85s ease-out, transform 0.85s ease-out;
   }
 
   .name-line.slide-in {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
   }
 
   .title {
@@ -1059,6 +1073,7 @@ import Scene from '../components/Scene.svelte';
     flex-direction: column;
     width: 100%;
     max-width: none;
+    min-height: 100%;
     border-radius: 1.75rem;
     overflow: hidden;
     text-decoration: none;
@@ -1108,6 +1123,15 @@ import Scene from '../components/Scene.svelte';
       inset -1px 0 24px rgba(230, 190, 255, 0.14);
   }
 
+  .project-card:hover .project-card-cta {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .project-card:hover .project-card-image img {
+    transform: scale(1.03);
+  }
+
   .project-card-image,
   .project-card-caption {
     position: relative;
@@ -1116,42 +1140,60 @@ import Scene from '../components/Scene.svelte';
 
   .project-card-image {
     width: 100%;
-    aspect-ratio: 1 / 1;
-    min-height: 280px;
+    aspect-ratio: 16 / 10;
+    min-height: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     background: transparent;
-    padding: 1.5rem;
+    padding: 1.35rem 1.5rem 0.75rem 1.5rem;
     box-sizing: border-box;
     overflow: hidden;
   }
 
+  .project-card-image::before {
+    content: '';
+    position: absolute;
+    width: min(48%, 160px);
+    aspect-ratio: 1;
+    border-radius: 28%;
+    background: rgba(255, 255, 255, 0.38);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.7),
+      0 8px 24px rgba(0, 0, 0, 0.04);
+    z-index: 0;
+  }
+
   .project-card-image img {
-    max-width: 85%;
-    max-height: 85%;
+    position: relative;
+    z-index: 1;
+    max-width: min(34%, 112px);
+    max-height: min(34%, 112px);
     width: auto;
     height: auto;
     object-fit: contain;
     display: block;
+    transition: transform 0.35s ease;
   }
 
   .project-card-image--compact img {
-    max-width: 48%;
-    max-height: 48%;
+    max-width: min(28%, 92px);
+    max-height: min(28%, 92px);
   }
 
   .project-card-caption {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
-    padding: 0 1.5rem 1.5rem 1.5rem;
+    gap: 0.35rem;
+    margin-top: auto;
+    padding: 0.85rem 1.5rem 1.35rem 1.5rem;
     background: transparent;
   }
 
   .project-card-title {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     font-weight: 600;
     letter-spacing: -0.01em;
     color: #1d1d1f;
@@ -1160,20 +1202,46 @@ import Scene from '../components/Scene.svelte';
 
   .project-card-description {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     font-weight: 400;
     letter-spacing: -0.01em;
+    line-height: 1.45;
     color: #6e6e73;
     margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 2.9em;
+  }
+
+  .project-card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-top: 0.45rem;
   }
 
   .project-card-tag {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 0.75rem;
-    font-weight: 400;
+    font-size: 0.72rem;
+    font-weight: 500;
     letter-spacing: 0.02em;
     color: #86868b;
-    margin-top: 0.25rem;
+    margin-top: 0;
+  }
+
+  .project-card-cta {
+    flex-shrink: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    color: #1d1d1f;
+    opacity: 0.45;
+    transform: translateX(-4px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
   }
 
   @media (max-width: 768px) {
@@ -1186,15 +1254,35 @@ import Scene from '../components/Scene.svelte';
     }
 
     .project-card-image {
-      padding: 1.75rem;
+      aspect-ratio: 16 / 9;
+      padding: 1.25rem 1.15rem 0.65rem 1.15rem;
+    }
+
+    .project-card-image::before {
+      width: min(44%, 140px);
+    }
+
+    .project-card-image img {
+      max-width: min(32%, 98px);
+      max-height: min(32%, 98px);
+    }
+
+    .project-card-image--compact img {
+      max-width: min(26%, 82px);
+      max-height: min(26%, 82px);
     }
 
     .project-card-caption {
-      padding: 0 1.25rem 1.25rem 1.25rem;
+      padding: 0.75rem 1.25rem 1.25rem 1.25rem;
     }
 
     .project-card-title {
-      font-size: 1.25rem;
+      font-size: 1.2rem;
+    }
+
+    .project-card-cta {
+      opacity: 0.7;
+      transform: none;
     }
   }
 
@@ -1701,11 +1789,11 @@ import Scene from '../components/Scene.svelte';
     }
 
     .project-card-image {
-      padding: 1.5rem 1.15rem;
+      padding: 1.25rem 1.15rem 0.65rem 1.15rem;
     }
 
     .project-card-caption {
-      padding: 0 1.15rem 1.25rem 1.15rem;
+      padding: 0.75rem 1.15rem 1.25rem 1.15rem;
     }
   }
 </style>
