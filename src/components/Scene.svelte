@@ -159,19 +159,18 @@
       const radius = baseRadius * targetScale;
 
       scene.add(sphere);
+      const mass = Math.pow(radius / baseRadius, 3);
       spheres.push({
         mesh: sphere,
         originalPosition: originalPositions[i],
-        currentTarget: new THREE.Vector3(x, y, z),
         radius,
+        mass,
         velocity: new THREE.Vector3(0, 0, 0),
-        speed: Math.random() * 0.02 + 0.01,
         targetScale,
-        rotation: {
-          x: (Math.random() - 0.5) * 0.02,
-          y: (Math.random() - 0.5) * 0.02,
-          z: (Math.random() - 0.5) * 0.02,
-        },
+        // Idle drift phase so each ball breathes differently
+        driftPhase: Math.random() * Math.PI * 2,
+        driftSpeed: 0.35 + Math.random() * 0.45,
+        driftAmp: 0.012 + Math.random() * 0.018,
       });
     }
 
@@ -214,14 +213,40 @@
       });
     }, 1000);
 
-    function handleMouseMove(event) {
-      targetMouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-      targetMouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    const _toMouse = new THREE.Vector3();
+    const _returnForce = new THREE.Vector3();
+    const _drift = new THREE.Vector3();
+    const _relVel = new THREE.Vector3();
+    const _impulse = new THREE.Vector3();
+    const _spinAxis = new THREE.Vector3();
+    const _collisionNormal = new THREE.Vector3();
+    let lastTime = performance.now();
+    let elapsedTime = 0;
+    const pointerActive = { value: false };
+
+    function setPointerFromClient(clientX, clientY) {
+      targetMouse.x = (clientX / window.innerWidth) * 2 - 1;
+      targetMouse.y = -(clientY / window.innerHeight) * 2 + 1;
+      pointerActive.value = true;
     }
 
-    function updateMousePosition() {
-      mouse.x += (targetMouse.x - mouse.x) * 0.1;
-      mouse.y += (targetMouse.y - mouse.y) * 0.1;
+    function handlePointerMove(event) {
+      setPointerFromClient(event.clientX, event.clientY);
+    }
+
+    function handlePointerLeave() {
+      pointerActive.value = false;
+    }
+
+    function handlePointerUp(event) {
+      // Keep desktop hover active; clear touch after lift
+      if (event.pointerType !== 'mouse') pointerActive.value = false;
+    }
+
+    function updateMousePosition(dt) {
+      const lerp = 1 - Math.pow(0.001, dt);
+      mouse.x += (targetMouse.x - mouse.x) * lerp;
+      mouse.y += (targetMouse.y - mouse.y) * lerp;
     }
 
     function getWorldPosition(mouseX, mouseY) {
@@ -232,42 +257,85 @@
       return camera.position.clone().add(dir.multiplyScalar(distance));
     }
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('pointermove', handlePointerMove, { passive: true });
+    window.addEventListener('pointerleave', handlePointerLeave);
+    window.addEventListener('pointerup', handlePointerUp);
+    window.addEventListener('pointercancel', handlePointerUp);
 
-    function animate() {
+    function animate(now) {
       requestAnimationFrame(animate);
-      updateMousePosition();
+      const rawDt = (now - lastTime) / 1000;
+      lastTime = now;
+      // Clamp so tab-refocus doesn't explode the sim
+      const dt = Math.min(Math.max(rawDt, 0), 0.05);
+      elapsedTime += dt;
+
+      updateMousePosition(dt);
       const worldMouse = getWorldPosition(mouse.x, mouse.y);
 
+      // Soft plastic feel — tuned in units/sec so 60/120Hz match
+      const damping = Math.pow(0.985, dt * 60);
+      const springStrength = 1.0;
+      const mouseForceMax = 80;
+      const maxSpeed = 7;
+      const restitution = 0.32;
+
       spheres.forEach((sphereData) => {
-        const { mesh, originalPosition, currentTarget, velocity, radius } = sphereData;
+        const {
+          mesh,
+          originalPosition,
+          velocity,
+          radius,
+          mass,
+          driftPhase,
+          driftSpeed,
+          driftAmp,
+        } = sphereData;
 
-        const distanceToMouse = mesh.position.distanceTo(worldMouse);
-        const hitRadius = radius * 3.3;
-
-        if (distanceToMouse < hitRadius && distanceToMouse > 0) {
-          const hitDirection = new THREE.Vector3()
-            .subVectors(mesh.position, worldMouse)
-            .normalize();
-          const hitStrength = 1 - distanceToMouse / hitRadius;
-          const impulseForce = hitStrength * 1.5;
-          velocity.add(hitDirection.multiplyScalar(impulseForce));
+        // Soft repulsion field (force falloff) instead of stacking impulses
+        if (pointerActive.value) {
+          const distanceToMouse = mesh.position.distanceTo(worldMouse);
+          const hitRadius = radius * 5.5;
+          if (distanceToMouse < hitRadius && distanceToMouse > 1e-4) {
+            const t = 1 - distanceToMouse / hitRadius;
+            const falloff = t;
+            _toMouse.subVectors(mesh.position, worldMouse).normalize();
+            // Heavier balls move a bit less
+            velocity.addScaledVector(_toMouse, (mouseForceMax * falloff * dt) / Math.max(mass, 0.35));
+          }
         }
 
-        velocity.multiplyScalar(0.997);
+        // Idle drift around home so the cluster breathes at rest
+        const phase = elapsedTime * driftSpeed + driftPhase;
+        _drift.set(
+          Math.sin(phase) * driftAmp,
+          Math.cos(phase * 0.87) * driftAmp * 0.85,
+          Math.sin(phase * 0.61) * driftAmp * 0.45
+        );
 
-        const returnForce = new THREE.Vector3()
+        _returnForce
           .subVectors(originalPosition, mesh.position)
-          .multiplyScalar(0.001);
-        velocity.add(returnForce);
+          .add(_drift)
+          .multiplyScalar(springStrength * dt);
+        velocity.add(_returnForce);
 
-        const maxVelocity = 0.15;
-        if (velocity.length() > maxVelocity) {
-          velocity.normalize().multiplyScalar(maxVelocity);
+        velocity.multiplyScalar(damping);
+
+        const speed = velocity.length();
+        if (speed > maxSpeed) {
+          velocity.multiplyScalar(maxSpeed / speed);
         }
 
-        mesh.position.add(velocity);
-        currentTarget.copy(mesh.position);
+        mesh.position.addScaledVector(velocity, dt);
+
+        // Spin from velocity so clearcoat reflections sell mass
+        const spinSpeed = velocity.length();
+        if (spinSpeed > 1e-4) {
+          _spinAxis.set(-velocity.y, velocity.x, -velocity.z).normalize();
+          mesh.rotateOnWorldAxis(_spinAxis, spinSpeed * 0.55 * dt);
+        } else {
+          mesh.rotateOnWorldAxis(_spinAxis.set(0.25, 1, 0.12).normalize(), 0.12 * dt);
+        }
       });
 
       for (let i = 0; i < spheres.length; i++) {
@@ -280,37 +348,32 @@
           const distance = pos1.distanceTo(pos2);
           const minDistance = sphere1.radius + sphere2.radius;
 
-          if (distance < minDistance && distance > 0) {
-            const direction = new THREE.Vector3().subVectors(pos1, pos2).normalize();
+          if (distance < minDistance && distance > 1e-6) {
+            const direction = _collisionNormal.subVectors(pos1, pos2).normalize();
             const overlap = minDistance - distance;
-            const pushStrength = overlap * 0.5;
-            const push1 = direction.clone().multiplyScalar(pushStrength * (sphere2.radius / minDistance));
-            const push2 = direction.clone().multiplyScalar(-pushStrength * (sphere1.radius / minDistance));
+            const invMass1 = 1 / sphere1.mass;
+            const invMass2 = 1 / sphere2.mass;
+            const invMassSum = invMass1 + invMass2;
 
-            pos1.add(push1);
-            pos2.add(push2);
+            // Separate fully by inverse mass so small balls yield more
+            pos1.addScaledVector(direction, overlap * (invMass1 / invMassSum));
+            pos2.addScaledVector(direction, -overlap * (invMass2 / invMassSum));
 
-            const bounceStrength = 0.3;
-            const relativeVelocity = new THREE.Vector3().subVectors(sphere1.velocity, sphere2.velocity);
-            const velocityAlongNormal = relativeVelocity.dot(direction);
+            _relVel.subVectors(sphere1.velocity, sphere2.velocity);
+            const velocityAlongNormal = _relVel.dot(direction);
+            if (velocityAlongNormal >= 0) continue;
 
-            if (velocityAlongNormal > 0) continue;
-
-            const restitution = 0.6;
-            const impulse = -(1 + restitution) * velocityAlongNormal / 2;
-
-            sphere1.velocity.add(direction.clone().multiplyScalar(impulse * bounceStrength));
-            sphere2.velocity.sub(direction.clone().multiplyScalar(impulse * bounceStrength));
-
-            sphere1.currentTarget.copy(pos1);
-            sphere2.currentTarget.copy(pos2);
+            const jImpulse = (-(1 + restitution) * velocityAlongNormal) / invMassSum;
+            _impulse.copy(direction).multiplyScalar(jImpulse);
+            sphere1.velocity.addScaledVector(_impulse, invMass1);
+            sphere2.velocity.addScaledVector(_impulse, -invMass2);
           }
         }
       }
 
       renderer.render(scene, camera);
     }
-    animate();
+    requestAnimationFrame(animate);
 
     function handleResize() {
       camera.aspect = window.innerWidth / window.innerHeight;
@@ -321,7 +384,10 @@
 
     return () => {
       window.removeEventListener('resize', handleResize);
-      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('pointerleave', handlePointerLeave);
+      window.removeEventListener('pointerup', handlePointerUp);
+      window.removeEventListener('pointercancel', handlePointerUp);
       geometry.dispose();
       spheres.forEach(({ mesh }) => mesh.material?.dispose?.());
       envMap?.dispose?.();
